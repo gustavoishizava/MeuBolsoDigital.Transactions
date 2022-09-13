@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using MBD.Core.Entities;
 using MBD.Transactions.Domain.Events.Common;
 
 namespace MBD.Transactions.Domain.Entities.Common

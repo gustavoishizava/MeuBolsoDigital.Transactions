@@ -1,5 +1,5 @@
-using MBD.Core.Data;
 using MBD.Transactions.Domain.Entities;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Domain.Interfaces.Repositories
 {

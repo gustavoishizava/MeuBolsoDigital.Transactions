@@ -1,9 +1,9 @@
 using System;
-using MBD.Core;
-using MBD.Core.Entities;
 using MBD.Transactions.Domain.Entities.Common;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Events;
+using MeuBolsoDigital.Core.Assertions;
+using MeuBolsoDigital.Core.Interfaces.Entities;
 
 namespace MBD.Transactions.Domain.Entities
 {
@@ -25,7 +25,7 @@ namespace MBD.Transactions.Domain.Entities
 
         public Transaction(Guid tenantId, BankAccount bankAccount, Category category, DateTime referenceDate, DateTime dueDate, decimal value, string description, DateTime? paymentDate)
         {
-            Assertions.IsGreaterOrEqualsThan(value, 0, "O valor não pode ser menor que 0.");
+            DomainAssertions.IsGreaterOrEqualsThan(value, 0, "O valor não pode ser menor que 0.");
 
             TenantId = tenantId;
             BankAccount = bankAccount;
@@ -70,7 +70,7 @@ namespace MBD.Transactions.Domain.Entities
 
         public void SetValue(decimal value)
         {
-            Assertions.IsGreaterOrEqualsThan(value, 0, "O valor não pode ser menor que 0.");
+            DomainAssertions.IsGreaterOrEqualsThan(value, 0, "O valor não pode ser menor que 0.");
 
             _valueChanged = value != Value;
             if (_valueChanged)
@@ -98,10 +98,10 @@ namespace MBD.Transactions.Domain.Entities
 
         public void LinkCreditCardBill(Guid creditCardBillId)
         {
-            Assertions.IsNull(CreditCardBillId, "A transação já possui fatura de cartão de crédito vinculada.");
-            Assertions.IsNotEmpty(creditCardBillId, "O Id da fatura do cartão de crédito está inválido.");
-            Assertions.IsFalse(ItsPaid, "Não é possível vincular uma fatura de cartão de crédito a uma transação já paga.");
-            Assertions.IsTrue(Category.Type == TransactionType.Expense, "Não é possível vincular uma fatura de cartão de crédito a uma transação de receita.");
+            DomainAssertions.IsNull(CreditCardBillId, "A transação já possui fatura de cartão de crédito vinculada.");
+            DomainAssertions.IsNotEmpty(creditCardBillId, "O Id da fatura do cartão de crédito está inválido.");
+            DomainAssertions.IsFalse(ItsPaid, "Não é possível vincular uma fatura de cartão de crédito a uma transação já paga.");
+            DomainAssertions.IsTrue(Category.Type == TransactionType.Expense, "Não é possível vincular uma fatura de cartão de crédito a uma transação de receita.");
 
             CreditCardBillId = creditCardBillId;
             AddDomainEvent(new LinkedToCreditCardBillDomainEvent(Id, BankAccount.Id, CreditCardBillId.Value, CreatedAt, Value));

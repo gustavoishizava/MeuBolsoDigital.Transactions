@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using MBD.Core;
-using MBD.Core.Entities;
-using MBD.Core.Enumerations;
 using MBD.Transactions.Domain.Entities.Common;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Events;
+using MeuBolsoDigital.Core.Assertions;
+using MeuBolsoDigital.Core.Interfaces.Entities;
 
 namespace MBD.Transactions.Domain.Entities
 {
@@ -23,9 +22,9 @@ namespace MBD.Transactions.Domain.Entities
 
         public Category(Guid tenantId, string name, TransactionType type)
         {
-            Assertions.IsNotNullOrEmpty(name, "É necessário informar um nome.");
-            Assertions.HasMaxLength(name, 100, "O nome deve conter no máximo 100 caracteres.");
-            Assertions.IsNotEmpty(tenantId, "Id de usuário inválido.");
+            DomainAssertions.IsNotNullOrEmpty(name, "É necessário informar um nome.");
+            DomainAssertions.HasMaxLength(name, 100, "O nome deve conter no máximo 100 caracteres.");
+            DomainAssertions.IsNotEmpty(tenantId, "Id de usuário inválido.");
 
             TenantId = tenantId;
             Name = name;
@@ -39,7 +38,7 @@ namespace MBD.Transactions.Domain.Entities
         private Category(Guid userId, Guid parentCategoryId, string name, TransactionType type)
             : this(userId, name, type)
         {
-            Assertions.IsNotEmpty(parentCategoryId, "Id de categoria pai inválido.");
+            DomainAssertions.IsNotEmpty(parentCategoryId, "Id de categoria pai inválido.");
 
             ParentCategoryId = parentCategoryId;
         }
@@ -50,8 +49,8 @@ namespace MBD.Transactions.Domain.Entities
 
         public void ChangeName(string name)
         {
-            Assertions.IsNotNullOrEmpty(name, "É necessário informar um nome.");
-            Assertions.HasMaxLength(name, 100, "O nome deve conter no máximo 100 caracteres.");
+            DomainAssertions.IsNotNullOrEmpty(name, "É necessário informar um nome.");
+            DomainAssertions.HasMaxLength(name, 100, "O nome deve conter no máximo 100 caracteres.");
 
             AddDomainEvent(new CategoryNameChangedDomainEvent(id: Id, newName: name, oldName: Name));
             Name = name;
@@ -69,7 +68,7 @@ namespace MBD.Transactions.Domain.Entities
 
         public Category AddSubCategory(string name)
         {
-            Assertions.IsTrue(CanHaveSubCategories(), "Não é permitido adicionar subcategorias à uma categoria filha.");
+            DomainAssertions.IsTrue(CanHaveSubCategories(), "Não é permitido adicionar subcategorias à uma categoria filha.");
 
             var subCategory = new Category(TenantId, Id, name, Type);
             _subCategories.Add(subCategory);

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MBD.Core.Data;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Domain.Interfaces.Repositories
 {
