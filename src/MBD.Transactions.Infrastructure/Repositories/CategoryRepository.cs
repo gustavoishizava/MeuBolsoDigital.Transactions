@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;

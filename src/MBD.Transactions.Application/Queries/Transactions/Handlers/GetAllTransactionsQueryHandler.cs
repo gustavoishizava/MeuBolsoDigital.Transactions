@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Transactions.Application.MongoDbSettings;
 using MBD.Transactions.Application.Queries.Transactions.Queries;
 using MBD.Transactions.Application.Response.Models;
 using MediatR;

@@ -1,7 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Transactions.Application.MongoDbSettings;
-using MBD.Transactions.Application.Response.Models;
 using MBD.Transactions.Domain.Events;
 using MediatR;
 

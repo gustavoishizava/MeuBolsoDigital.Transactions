@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using MBD.Core.DomainObjects;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;
+using MeuBolsoDigital.Core.Exceptions;
 using Xunit;
 
 namespace MBD.Transactions.UnitTests.Domain.Entities

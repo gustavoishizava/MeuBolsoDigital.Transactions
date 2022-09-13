@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DotNet.MongoDB.Context.Configuration;
 using DotNet.MongoDB.Context.Context;

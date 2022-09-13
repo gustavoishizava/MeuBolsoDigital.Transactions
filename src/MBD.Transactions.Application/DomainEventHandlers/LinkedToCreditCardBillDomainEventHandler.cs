@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Transactions.Application.IntegrationEvents.Events;
 using MBD.Transactions.Domain.Events;
 using MediatR;
 

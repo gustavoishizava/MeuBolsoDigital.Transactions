@@ -1,12 +1,5 @@
 using System.Collections.Generic;
 using System.Reflection;
-using MBD.Application.Core.Response;
-using MBD.Core.Data;
-using MBD.Core.Identity;
-using MBD.IntegrationEventLog.Services;
-using MBD.MessageBus;
-using MBD.Transactions.API.Configuration.HttpClient;
-using MBD.Transactions.Application.BackgroundServices;
 using MBD.Transactions.Application.DomainEventHandlers;
 using MBD.Transactions.Application.IntegrationEvents.EventHandling;
 using MBD.Transactions.Application.IntegrationEvents.Events;
@@ -25,6 +18,10 @@ using MBD.Transactions.Application.Queries.Categories.Queries;
 using MBD.Transactions.Application.Queries.Categories.Handlers;
 using MBD.Transactions.Application.Commands.Transactions;
 using MBD.Transactions.Application.Commands.Categories;
+using MeuBolsoDigital.Core.Interfaces.Identity;
+using MBD.Transactions.API.Identity;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
 namespace MBD.Transactions.API.Configuration
 {
@@ -34,19 +31,15 @@ namespace MBD.Transactions.API.Configuration
         {
             services
                 .AddRepositories()
-                .AddHttpClients(configuration)
                 .AddCommands()
                 .AddQueries()
                 .AddDomainEvents()
                 .AddIntegrationEvents()
-                .AddConfigurations(configuration)
-                .AddMessageBus()
                 .AddConsumers()
-                .AddIntegrationEventLogsService()
                 .AddOutBoxTransaction();
 
             services.AddHttpContextAccessor();
-            services.AddScoped<IAspNetUser, AspNetUser>();
+            services.AddScoped<ILoggedUser, WebAppUser>();
             services.AddAutoMapper(Assembly.Load("MBD.Transactions.Application"));
 
             return services;
@@ -58,13 +51,6 @@ namespace MBD.Transactions.API.Configuration
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            return services;
-        }
-
-        private static IServiceCollection AddHttpClients(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
             return services;
         }
@@ -118,38 +104,13 @@ namespace MBD.Transactions.API.Configuration
             return services;
         }
 
-        private static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.Configure<RabbitMqConfiguration>(configuration.GetSection(nameof(RabbitMqConfiguration)));
-
-            return services;
-        }
-
-        private static IServiceCollection AddMessageBus(this IServiceCollection services)
-        {
-            services.AddSingleton<IMessageBus, MBD.MessageBus.MessageBus>();
-
-            return services;
-        }
-
         private static IServiceCollection AddConsumers(this IServiceCollection services)
         {
-            services.AddHostedService<BankAccountConsumerService>();
-
-            return services;
-        }
-
-        private static IServiceCollection AddIntegrationEventLogsService(this IServiceCollection services)
-        {
-            services.AddScoped<IIntegrationEventLogService, IntegrationEventLogService>();
-
             return services;
         }
 
         private static IServiceCollection AddOutBoxTransaction(this IServiceCollection services)
         {
-            services.AddHostedService<PublishIntegrationEventsService>();
-
             return services;
         }
     }

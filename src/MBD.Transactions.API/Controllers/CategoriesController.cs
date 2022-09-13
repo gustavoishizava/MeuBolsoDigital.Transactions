@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using MBD.Core.Extensions;
 using MBD.Transactions.API.Models;
 using MBD.Transactions.Application.Response;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +11,7 @@ using MBD.Transactions.Domain.Enumerations;
 using MediatR;
 using MBD.Transactions.Application.Queries.Categories.Queries;
 using MBD.Transactions.Application.Commands.Categories;
+using MeuBolsoDigital.CrossCutting.Extensions;
 
 namespace MBD.Transactions.API.Controllers
 {
