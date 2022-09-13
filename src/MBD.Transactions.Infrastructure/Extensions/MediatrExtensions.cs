@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
-using MBD.Core.Extensions;
 using MBD.Transactions.Domain.Entities.Common;
 using MBD.Transactions.Infrastructure.Context;
 using MediatR;
+using MeuBolsoDigital.CrossCutting.Extensions;
 
 namespace MBD.Transactions.Infrastructure.Extensions
 {
@@ -11,14 +11,12 @@ namespace MBD.Transactions.Infrastructure.Extensions
     {
         public static async Task DispatchDomainEventsAsync(this IMediator mediator, TransactionContext context)
         {
-            var entities = context.ChangeTracker.Entries<BaseEntityWithEvent>()
-                .Where(x => !x.Entity.Events.IsNullOrEmpty());
-
-            var domainEvents = entities.SelectMany(x => x.Entity.Events).OrderBy(x => x.TimeStamp).ToList();
-
-            entities.ToList().ForEach(x => x.Entity.ClearDomainEvents());
-
-            var tasks = domainEvents.Select((domainEvent) => mediator.Publish(domainEvent));
+            var values = context.ChangeTracker.Entries.Where(x => x.Value.GetType().BaseType == typeof(BaseEntityWithEvent)).Select(x => (BaseEntityWithEvent)x.Value);
+            var domainEvents = values.Where(x => !x.Events.IsNullOrEmpty())
+                                     .SelectMany(x => x.Events)
+                                     .OrderBy(x => x.TimeStamp)
+                                     .ToList();
+            var tasks = domainEvents.Select(x => mediator.Publish(x));
 
             await Task.WhenAll(tasks);
         }

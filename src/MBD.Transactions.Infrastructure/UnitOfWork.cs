@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using MBD.Core.Data;
 using MBD.Transactions.Infrastructure.Context;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Infrastructure
 {
@@ -13,9 +13,10 @@ namespace MBD.Transactions.Infrastructure
             _context = context;
         }
 
-        public async Task<int> SaveChangesAsync()
+        public async Task<bool> CommitAsync()
         {
-            return await _context.SaveChangesAsync();
+            await _context.CommitAsync();
+            return true;
         }
     }
 }

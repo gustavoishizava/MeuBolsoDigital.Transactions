@@ -5,59 +5,39 @@ using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Interfaces.Repositories;
-using MBD.Transactions.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace MBD.Transactions.Infrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly TransactionContext _context;
-
-        public CategoryRepository(TransactionContext context)
+        public Task AddAsync(Category entity)
         {
-            _context = context;
+            throw new NotImplementedException();
         }
 
-        public void Add(Category category)
+        public Task<IEnumerable<Category>> GetAllAsync(bool includeSubCategories = true)
         {
-            _context.Add(category);
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync(bool includeSubCategories = true)
+        public Task<Category> GetByIdAsync(Guid id)
         {
-            var query = _context.Categories.AsNoTracking();
-            if (includeSubCategories)
-                query = query.Where(x => x.ParentCategoryId == null).Include(x => x.SubCategories);
-
-            return await query.ToListAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<Category> GetByIdAsync(Guid id)
+        public Task<IEnumerable<Category>> GetByTypeAsync(TransactionType type, bool includeSubCategories = true)
         {
-            return await _context.Categories.FindAsync(id);
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Category>> GetByTypeAsync(TransactionType type, bool includeSubCategories = true)
+        public Task RemoveAsync(Category entity)
         {
-            var query = _context.Categories
-                .AsNoTracking()
-                .Where(x => x.Type == type);
-
-            if (includeSubCategories)
-                query = query.Where(x => x.ParentCategoryId == null).Include(x => x.SubCategories);
-
-            return await query.ToListAsync();
+            throw new NotImplementedException();
         }
 
-        public void Remove(Category category)
+        public Task UpdateAsync(Category entity)
         {
-            _context.Remove(category);
-        }
-
-        public void Update(Category category)
-        {
-            _context.Update(category);
+            throw new NotImplementedException();
         }
     }
 }

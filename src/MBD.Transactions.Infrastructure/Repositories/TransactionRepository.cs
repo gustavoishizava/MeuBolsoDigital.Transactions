@@ -1,38 +1,32 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
-using MBD.Transactions.Infrastructure.Context;
 
 namespace MBD.Transactions.Infrastructure.Repositories
 {
     public class TransactionRepository : ITransactionRepository
     {
-        private readonly TransactionContext _context;
-
-        public TransactionRepository(TransactionContext context)
+        public Task AddAsync(Transaction entity)
         {
-            _context = context;
+            throw new NotImplementedException();
         }
 
-        public void Add(Transaction transaction)
+        public Task<Transaction> GetByIdAsync(Guid id)
         {
-            _context.Add(transaction);
+            throw new NotImplementedException();
         }
 
-        public async Task<Transaction> GetByIdAsync(Guid id)
+        public Task RemoveAsync(Transaction entity)
         {
-            return await _context.Transactions.FindAsync(id);
+            throw new NotImplementedException();
         }
 
-        public void Remove(Transaction transaction)
+        public Task UpdateAsync(Transaction entity)
         {
-            _context.Remove(transaction);
-        }
-
-        public void Update(Transaction transaction)
-        {
-            _context.Update(transaction);
+            throw new NotImplementedException();
         }
     }
 }
