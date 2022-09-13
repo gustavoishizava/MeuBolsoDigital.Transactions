@@ -1,10 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Application.Core.Response;
-using MBD.Core.Data;
 using MBD.Transactions.Domain.Events;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Application.Commands.Transactions
 {
@@ -30,8 +31,8 @@ namespace MBD.Transactions.Application.Commands.Transactions
                 return Result.Fail("Transação inválida.");
 
             transaction.AddDomainEvent(new TransactionDeletedDomainEvent(transaction.Id));
-            _repository.Remove(transaction);
-            await _unitOfwork.SaveChangesAsync();
+            await _repository.RemoveAsync(transaction);
+            await _unitOfwork.CommitAsync();
 
             return Result.Success();
         }

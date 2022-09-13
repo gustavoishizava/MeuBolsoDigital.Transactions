@@ -1,11 +1,9 @@
 using MBD.Transactions.Domain.Entities;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace MBD.Transactions.Application.Response.Models
 {
     public class BankAccountModel
     {
-        [BsonId]
         public string Id { get; set; }
         public string Description { get; set; }
 

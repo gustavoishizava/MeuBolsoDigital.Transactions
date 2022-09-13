@@ -1,5 +1,4 @@
 using System;
-using MBD.Core.Enumerations;
 using MBD.Transactions.Domain.Enumerations;
 
 namespace MBD.Transactions.Application.Response

@@ -1,10 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Application.Core.Response;
-using MBD.Core.Data;
-using MBD.Core.Enumerations;
+using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Application.Commands.Categories
 {
@@ -35,8 +36,8 @@ namespace MBD.Transactions.Application.Commands.Categories
             else
                 category.Deactivate();
 
-            _repository.Update(category);
-            await _unitOfWork.SaveChangesAsync();
+            await _repository.UpdateAsync(category);
+            await _unitOfWork.CommitAsync();
 
             return Result.Success();
         }

@@ -1,27 +1,28 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Application.Core.Response;
-using MBD.Core.Data;
-using MBD.Core.Identity;
 using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
+using MeuBolsoDigital.Core.Interfaces.Identity;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Application.Commands.Transactions
 {
     public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, IResult<TransactionResponse>>
     {
         private readonly ITransactionRepository _transactionRepository;
-        private readonly IAspNetUser _aspNetUser;
+        private readonly ILoggedUser _loggedUser;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IBankAccountRepository _bankAccountRepository;
 
-        public CreateTransactionCommandHandler(ITransactionRepository transactionRepository, IAspNetUser aspNetUser, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IBankAccountRepository bankAccountRepository)
+        public CreateTransactionCommandHandler(ITransactionRepository transactionRepository, ILoggedUser loggedUser, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IBankAccountRepository bankAccountRepository)
         {
             _transactionRepository = transactionRepository;
-            _aspNetUser = aspNetUser;
+            _loggedUser = loggedUser;
             _unitOfWork = unitOfWork;
             _categoryRepository = categoryRepository;
             _bankAccountRepository = bankAccountRepository;
@@ -42,7 +43,7 @@ namespace MBD.Transactions.Application.Commands.Transactions
                 return Result<TransactionResponse>.Fail("Categoria inválida.");
 
             var transaction = new Transaction(
-                _aspNetUser.UserId,
+                _loggedUser.UserId,
                 bankAccount,
                 category,
                 request.ReferenceDate,
@@ -52,8 +53,8 @@ namespace MBD.Transactions.Application.Commands.Transactions
                 request.PaymentDate
             );
 
-            _transactionRepository.Add(transaction);
-            await _unitOfWork.SaveChangesAsync();
+            await _transactionRepository.AddAsync(transaction);
+            await _unitOfWork.CommitAsync();
 
             return Result<TransactionResponse>.Success(new TransactionResponse(transaction));
         }

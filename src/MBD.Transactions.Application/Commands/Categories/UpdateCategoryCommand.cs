@@ -1,9 +1,9 @@
 using System;
 using FluentValidation;
 using FluentValidation.Results;
-using MBD.Application.Core.Response;
-using MBD.Core.Enumerations;
 using MBD.Transactions.Application.Commands.Common;
+using MBD.Transactions.Domain.Enumerations;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
 namespace MBD.Transactions.Application.Commands.Categories
 {

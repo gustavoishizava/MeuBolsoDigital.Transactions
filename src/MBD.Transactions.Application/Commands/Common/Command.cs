@@ -1,6 +1,6 @@
 using FluentValidation.Results;
-using MBD.Application.Core.Response;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
 namespace MBD.Transactions.Application.Commands.Common
 {

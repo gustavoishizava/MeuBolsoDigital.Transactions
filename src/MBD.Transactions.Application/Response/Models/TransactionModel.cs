@@ -1,12 +1,10 @@
 using System;
 using MBD.Transactions.Domain.Enumerations;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace MBD.Transactions.Application.Response.Models
 {
     public class TransactionModel
     {
-        [BsonId]
         public string Id { get; set; }
         public string TenantId { get; set; }
         public BankAccountModel BankAccount { get; set; }

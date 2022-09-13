@@ -1,11 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MBD.Application.Core.Response;
 using MBD.Transactions.Application.Queries.Categories.Queries;
 using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
 namespace MBD.Transactions.Application.Queries.Categories.Handlers
 {

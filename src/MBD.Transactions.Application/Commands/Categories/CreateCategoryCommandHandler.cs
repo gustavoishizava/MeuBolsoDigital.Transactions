@@ -1,13 +1,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MBD.Application.Core.Response;
-using MBD.Core.Data;
-using MBD.Core.Identity;
 using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
+using MeuBolsoDigital.Core.Interfaces.Identity;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Application.Commands.Categories
 {
@@ -15,14 +16,14 @@ namespace MBD.Transactions.Application.Commands.Categories
     {
         private readonly ICategoryRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAspNetUser _aspNetUser;
+        private readonly ILoggedUser _loggedUser;
         private readonly IMapper _mapper;
 
-        public CreateCategoryCommandHandler(ICategoryRepository repository, IUnitOfWork unitOfWork, IAspNetUser aspNetUser, IMapper mapper)
+        public CreateCategoryCommandHandler(ICategoryRepository repository, IUnitOfWork unitOfWork, ILoggedUser loggedUser, IMapper mapper)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
-            _aspNetUser = aspNetUser;
+            _loggedUser = loggedUser;
             _mapper = mapper;
         }
 
@@ -46,11 +47,11 @@ namespace MBD.Transactions.Application.Commands.Categories
             }
             else
             {
-                category = new Category(_aspNetUser.UserId, request.Name, request.Type);
-                _repository.Add(category);
+                category = new Category(_loggedUser.UserId, request.Name, request.Type);
+                await _repository.AddAsync(category);
             }
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitAsync();
 
             return Result<CategoryResponse>.Success(_mapper.Map<CategoryResponse>(category));
         }

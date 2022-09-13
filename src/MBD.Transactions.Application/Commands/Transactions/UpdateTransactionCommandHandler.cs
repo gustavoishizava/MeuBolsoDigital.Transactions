@@ -1,26 +1,27 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Application.Core.Response;
-using MBD.Core.Data;
-using MBD.Core.Identity;
 using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
+using MeuBolsoDigital.Application.Utils.Responses;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
+using MeuBolsoDigital.Core.Interfaces.Identity;
+using MeuBolsoDigital.Core.Interfaces.Repositories;
 
 namespace MBD.Transactions.Application.Commands.Transactions
 {
     public class UpdateTransactionCommandHandler : IRequestHandler<UpdateTransactionCommand, IResult>
     {
         private readonly ITransactionRepository _transactionRepository;
-        private readonly IAspNetUser _aspNetUser;
+        private readonly ILoggedUser _loggedUser;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IBankAccountRepository _bankAccountRepository;
 
-        public UpdateTransactionCommandHandler(ITransactionRepository transactionRepository, IAspNetUser aspNetUser, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IBankAccountRepository bankAccountRepository)
+        public UpdateTransactionCommandHandler(ITransactionRepository transactionRepository, ILoggedUser loggedUser, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IBankAccountRepository bankAccountRepository)
         {
             _transactionRepository = transactionRepository;
-            _aspNetUser = aspNetUser;
+            _loggedUser = loggedUser;
             _unitOfWork = unitOfWork;
             _categoryRepository = categoryRepository;
             _bankAccountRepository = bankAccountRepository;
@@ -42,7 +43,7 @@ namespace MBD.Transactions.Application.Commands.Transactions
 
             transaction.Update(bankAccount, category, request.ReferenceDate, request.DueDate, request.Value, request.Description, request.PaymentDate);
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitAsync();
 
             return Result.Success();
         }

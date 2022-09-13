@@ -1,9 +1,9 @@
 using System;
 using FluentValidation;
 using FluentValidation.Results;
-using MBD.Application.Core.Response;
 using MBD.Transactions.Application.Commands.Common;
 using MBD.Transactions.Application.Response;
+using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
 namespace MBD.Transactions.Application.Commands.Transactions
 {
