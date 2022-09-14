@@ -22,9 +22,11 @@ using MeuBolsoDigital.Core.Interfaces.Identity;
 using MBD.Transactions.API.Identity;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MBD.Transactions.API.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class DependencyInjectionConfiguration
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services, IConfiguration configuration)
