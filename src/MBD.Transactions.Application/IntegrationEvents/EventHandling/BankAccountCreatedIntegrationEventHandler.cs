@@ -26,7 +26,7 @@ namespace MBD.Transactions.Application.IntegrationEvents.EventHandling
                 return;
 
             var bankAccount = new BankAccount(notification.Id, notification.TenantId, notification.Description);
-            _repository.Add(bankAccount);
+            await _repository.AddAsync(bankAccount);
             await _unitOfWork.CommitAsync();
         }
     }

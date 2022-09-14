@@ -2,24 +2,33 @@ using System;
 using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
+using MBD.Transactions.Infrastructure.Context;
+using MongoDB.Driver;
 
 namespace MBD.Transactions.Infrastructure.Repositories
 {
     public class BankAccountRepository : IBankAccountRepository
     {
-        public void Add(BankAccount bankAccount)
+        private readonly TransactionContext _context;
+
+        public BankAccountRepository(TransactionContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<BankAccount> GetByIdAsync(Guid id)
+        public async Task AddAsync(BankAccount bankAccount)
         {
-            throw new NotImplementedException();
+            await _context.BankAccounts.AddAsync(bankAccount);
         }
 
-        public void Update(BankAccount bankAccount)
+        public async Task<BankAccount> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.BankAccounts.Collection.Find(Builders<BankAccount>.Filter.Where(x => x.Id == id)).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateAsync(BankAccount bankAccount)
+        {
+            await _context.BankAccounts.UpdateAsync(Builders<BankAccount>.Filter.Where(x => x.Id == bankAccount.Id), bankAccount);
         }
     }
 }

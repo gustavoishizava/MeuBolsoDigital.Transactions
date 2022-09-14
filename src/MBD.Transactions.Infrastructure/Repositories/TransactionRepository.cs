@@ -2,29 +2,41 @@ using System;
 using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
+using MBD.Transactions.Infrastructure.Context;
+using MeuBolsoDigital.Core.Interfaces.Identity;
+using MongoDB.Driver;
 
 namespace MBD.Transactions.Infrastructure.Repositories
 {
     public class TransactionRepository : ITransactionRepository
     {
-        public Task AddAsync(Transaction entity)
+        private readonly TransactionContext _context;
+        private readonly ILoggedUser _loggedUser;
+
+        public TransactionRepository(TransactionContext context, ILoggedUser loggedUser)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _loggedUser = loggedUser;
         }
 
-        public Task<Transaction> GetByIdAsync(Guid id)
+        public async Task AddAsync(Transaction entity)
         {
-            throw new NotImplementedException();
+            await _context.Transactions.AddAsync(entity);
         }
 
-        public Task RemoveAsync(Transaction entity)
+        public async Task<Transaction> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Transactions.Collection.Find(Builders<Transaction>.Filter.Where(x => x.Id == id && x.TenantId == _loggedUser.UserId)).FirstOrDefaultAsync();
         }
 
-        public Task UpdateAsync(Transaction entity)
+        public async Task RemoveAsync(Transaction entity)
         {
-            throw new NotImplementedException();
+            await _context.Transactions.RemoveAsync(Builders<Transaction>.Filter.Where(x => x.Id == entity.Id), entity);
+        }
+
+        public async Task UpdateAsync(Transaction entity)
+        {
+            await _context.Transactions.UpdateAsync(Builders<Transaction>.Filter.Where(x => x.Id == entity.Id), entity);
         }
     }
 }

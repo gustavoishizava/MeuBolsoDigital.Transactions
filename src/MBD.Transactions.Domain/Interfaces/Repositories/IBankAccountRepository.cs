@@ -7,7 +7,7 @@ namespace MBD.Transactions.Domain.Interfaces.Repositories
     public interface IBankAccountRepository
     {
         Task<BankAccount> GetByIdAsync(Guid id);
-        void Add(BankAccount bankAccount);
-        void Update(BankAccount bankAccount);
+        Task AddAsync(BankAccount bankAccount);
+        Task UpdateAsync(BankAccount bankAccount);
     }
 }
