@@ -15,6 +15,8 @@ namespace MBD.Transactions.Domain.Entities
             Description = description;
         }
 
+        protected BankAccount() { }
+
         public void SetDescription(string description)
         {
             Description = description;

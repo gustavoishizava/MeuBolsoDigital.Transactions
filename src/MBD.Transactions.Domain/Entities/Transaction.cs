@@ -44,9 +44,7 @@ namespace MBD.Transactions.Domain.Entities
             AddDomainEvent(new TransactionCreatedDomainEvent(this));
         }
 
-        #region EF
         protected Transaction() { }
-        #endregion
 
         private void Pay(DateTime paymentDate)
         {

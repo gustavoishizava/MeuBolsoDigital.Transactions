@@ -1,5 +1,6 @@
 using DotNet.MongoDB.Context.Extensions;
 using MBD.Transactions.Infrastructure.Context;
+using MBD.Transactions.Infrastructure.Context.CustomerSerializers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -9,12 +10,15 @@ namespace MBD.Transactions.API.Configuration
 {
     public static class DatabaseConfiguration
     {
-        public static IServiceCollection AddEFContextConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDbContextConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMongoDbContext<TransactionContext>(options =>
             {
                 options.ConfigureConnection(configuration.GetConnectionString("Default"), configuration["DatabaseName"]);
                 options.AddSerializer(new GuidSerializer(BsonType.String));
+                options.AddSerializer(new StatusSerializer());
+                options.AddSerializer(new TransactionStatusSerializer());
+                options.AddSerializer(new TransactionTypeSerializer());
             });
 
             return services;

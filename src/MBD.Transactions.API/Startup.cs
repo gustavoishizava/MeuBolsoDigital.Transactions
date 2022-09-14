@@ -24,7 +24,7 @@ namespace MBD.Transactions.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEFContextConfiguration(Configuration);
+            services.AddDbContextConfiguration(Configuration);
             services.AddHealthCheckConfiguration();
             services.AddJwtConfiguration(Configuration);
             services.AddApiConfiguration(Configuration);
