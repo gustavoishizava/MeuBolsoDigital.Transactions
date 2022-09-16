@@ -68,7 +68,7 @@ namespace MBD.Transactions.Infrastructure.Context
                     .SetElementName("status");
 
                 map.MapField("_subCategories")
-                    .SetElementName("subcategories");
+                    .SetShouldSerializeMethod(x => false);
             });
 
             modelBuilder.AddModelMap<Transaction>("transactions", map =>

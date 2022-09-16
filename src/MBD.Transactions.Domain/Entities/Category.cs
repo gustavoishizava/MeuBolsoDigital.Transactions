@@ -10,7 +10,7 @@ namespace MBD.Transactions.Domain.Entities
 {
     public class Category : BaseEntityWithEvent, IAggregateRoot
     {
-        private readonly List<Category> _subCategories = new();
+        private List<Category> _subCategories = new();
 
         public Guid TenantId { get; private init; }
         public Guid? ParentCategoryId { get; private set; }

@@ -48,9 +48,9 @@ namespace MBD.Transactions.Application.Commands.Categories
             else
             {
                 category = new Category(_loggedUser.UserId, request.Name, request.Type);
-                await _repository.AddAsync(category);
             }
 
+            await _repository.AddAsync(category);
             await _unitOfWork.CommitAsync();
 
             return Result<CategoryResponse>.Success(_mapper.Map<CategoryResponse>(category));

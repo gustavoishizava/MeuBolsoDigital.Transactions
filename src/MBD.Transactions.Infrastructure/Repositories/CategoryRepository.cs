@@ -28,25 +28,30 @@ namespace MBD.Transactions.Infrastructure.Repositories
 
         public async Task<IEnumerable<Category>> GetAllAsync(bool includeSubCategories = true)
         {
-            var findFluent = _context.Categories.Collection.Find(Builders<Category>.Filter.Where(x => x.TenantId == _loggedUser.UserId));
-            if (!includeSubCategories)
-                findFluent = findFluent.Project<Category>(Builders<Category>.Projection.Exclude("subcategories"));
+            var query = _context.Categories.Collection.Aggregate<Category>()
+                                                      .Match(x => x.TenantId == _loggedUser.UserId && x.ParentCategoryId == null);
+            if (includeSubCategories)
+                query = query.Lookup<Category, Category>("categories", "_id", "parent_category_id", "_subCategories");
 
-            return await findFluent.ToListAsync();
+            return await query.ToListAsync();
         }
 
         public async Task<Category> GetByIdAsync(Guid id)
         {
-            return await _context.Categories.Collection.Find(Builders<Category>.Filter.Where(x => x.Id == id && x.TenantId == _loggedUser.UserId)).FirstOrDefaultAsync();
+            return await _context.Categories.Collection.Aggregate<Category>()
+                                                       .Match(x => x.Id == id && x.TenantId == _loggedUser.UserId)
+                                                       .Lookup<Category, Category>("categories", "_id", "parent_category_id", "_subCategories")
+                                                       .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Category>> GetByTypeAsync(TransactionType type, bool includeSubCategories = true)
         {
-            var findFluent = _context.Categories.Collection.Find(Builders<Category>.Filter.Where(x => x.TenantId == _loggedUser.UserId && x.Type == type));
-            if (!includeSubCategories)
-                findFluent = findFluent.Project<Category>(Builders<Category>.Projection.Exclude("subcategories"));
+            var query = _context.Categories.Collection.Aggregate<Category>()
+                                                      .Match(x => x.TenantId == _loggedUser.UserId && x.ParentCategoryId == null && x.Type == type);
+            if (includeSubCategories)
+                query = query.Lookup<Category, Category>("categories", "_id", "parent_category_id", "_subCategories");
 
-            return await findFluent.ToListAsync();
+            return await query.ToListAsync();
         }
 
         public async Task RemoveAsync(Category entity)
