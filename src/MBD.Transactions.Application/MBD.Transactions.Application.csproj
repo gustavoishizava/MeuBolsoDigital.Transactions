@@ -3,13 +3,12 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="10.3.0"/>
-    <PackageReference Include="MediatR" Version="9.0.0"/>
-    <PackageReference Include="AutoMapper" Version="10.1.1"/>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0"/>
-    <PackageReference Include="MeuBolsoDigital.Application.Utils" Version="1.0.2"/>
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="MeuBolsoDigital.Application.Utils" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MBD.Transactions.Domain\MBD.Transactions.Domain.csproj"/>
+    <ProjectReference Include="..\MBD.Transactions.Domain\MBD.Transactions.Domain.csproj" />
   </ItemGroup>
 </Project>
