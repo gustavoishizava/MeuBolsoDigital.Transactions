@@ -10,5 +10,6 @@ namespace MBD.Transactions.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Category>> GetByTypeAsync(TransactionType type, bool includeSubCategories = true);
         Task<IEnumerable<Category>> GetAllAsync(bool includeSubCategories = true);
+        Task UpdateRangeAsync(List<Category> categories);
     }
 }

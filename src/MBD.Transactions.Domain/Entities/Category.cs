@@ -80,5 +80,7 @@ namespace MBD.Transactions.Domain.Entities
         {
             return ParentCategoryId == null;
         }
+
+        public void ClearCategoryParentId() => ParentCategoryId = null;
     }
 }

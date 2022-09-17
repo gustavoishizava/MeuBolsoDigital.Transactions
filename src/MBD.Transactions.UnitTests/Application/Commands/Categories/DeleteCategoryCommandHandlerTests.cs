@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Bogus;
@@ -78,7 +79,40 @@ namespace MBD.Transactions.UnitTests.Application.Commands.Categories
         }
 
         [Fact]
-        public async Task Handle_ReturnSuccess()
+        public async Task Handle_HaveSubcategory_ReturnSuccess()
+        {
+            // Arrange
+            var category = new Category(Guid.NewGuid(), "Category", TransactionType.Expense);
+            var subcategory = category.AddSubCategory("subcategory");
+
+            var command = new DeleteCategoryCommand(category.Id);
+
+            _autoMocker.GetMock<ICategoryRepository>()
+                .Setup(x => x.GetByIdAsync(command.Id))
+                .ReturnsAsync(category);
+
+            // Act
+            var result = await _handler.Handle(command, new CancellationToken());
+
+            // Assert
+            Assert.True(result.Succeeded);
+            Assert.Null(result.Message);
+
+            _autoMocker.GetMock<ICategoryRepository>()
+                .Verify(x => x.GetByIdAsync(command.Id), Times.Once);
+
+            _autoMocker.GetMock<ICategoryRepository>()
+                .Verify(x => x.UpdateRangeAsync(It.Is<List<Category>>(x => x.TrueForAll(x => x.ParentCategoryId == null))), Times.Once);
+
+            _autoMocker.GetMock<ICategoryRepository>()
+                .Verify(x => x.RemoveAsync(It.Is<Category>(x => x.Id == command.Id)), Times.Once);
+
+            _autoMocker.GetMock<IUnitOfWork>()
+                .Verify(x => x.CommitAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task Handle_NoHaveSubcategory_ReturnSuccess()
         {
             // Arrange
             var category = new Category(Guid.NewGuid(), "Category", TransactionType.Expense);
@@ -97,6 +131,9 @@ namespace MBD.Transactions.UnitTests.Application.Commands.Categories
 
             _autoMocker.GetMock<ICategoryRepository>()
                 .Verify(x => x.GetByIdAsync(command.Id), Times.Once);
+
+            _autoMocker.GetMock<ICategoryRepository>()
+                .Verify(x => x.UpdateRangeAsync(It.IsAny<List<Category>>()), Times.Never);
 
             _autoMocker.GetMock<ICategoryRepository>()
                 .Verify(x => x.RemoveAsync(It.Is<Category>(x => x.Id == command.Id)), Times.Once);

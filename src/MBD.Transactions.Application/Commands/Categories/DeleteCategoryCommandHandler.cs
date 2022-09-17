@@ -1,10 +1,13 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
 using MeuBolsoDigital.Application.Utils.Responses;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
+using MeuBolsoDigital.CrossCutting.Extensions;
 
 namespace MBD.Transactions.Application.Commands.Categories
 {
@@ -29,10 +32,24 @@ namespace MBD.Transactions.Application.Commands.Categories
             if (category == null)
                 return Result.Fail("Categoria inválida.");
 
+            await UpdateSubcategoriesAsync(category);
             await _repository.RemoveAsync(category);
+
             await _unitOfWork.CommitAsync();
 
             return Result.Success();
+        }
+
+        private async Task UpdateSubcategoriesAsync(Category categoryToDelete)
+        {
+            if (categoryToDelete.SubCategories.IsNullOrEmpty())
+                return;
+
+            var categoriesToUpdate = categoryToDelete.SubCategories.ToList();
+            foreach (var category in categoriesToUpdate)
+                category.ClearCategoryParentId();
+
+            await _repository.UpdateRangeAsync(categoriesToUpdate);
         }
     }
 }

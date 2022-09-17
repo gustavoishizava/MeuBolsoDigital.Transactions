@@ -92,5 +92,21 @@ namespace MBD.Transactions.UnitTests.Domain.Entities
             // Act && Assert
             Assert.Throws<DomainException>(() => subCategory.AddSubCategory("Nova Subcategoria"));
         }
+
+        [Fact]
+        public void ClearParentCategoryId_ReturnSuccess()
+        {
+            // Arrange
+            var category = new Category(Guid.NewGuid(), "Category", TransactionType.Expense);
+            var subcategory = category.AddSubCategory("subcategory");
+            var parentCategoryId = subcategory.ParentCategoryId;
+
+            // Act
+            subcategory.ClearCategoryParentId();
+
+            // Assert
+            Assert.Null(subcategory.ParentCategoryId);
+            Assert.NotEqual(parentCategoryId, subcategory.ParentCategoryId);
+        }
     }
 }

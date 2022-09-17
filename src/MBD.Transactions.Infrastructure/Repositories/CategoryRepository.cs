@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DotNet.MongoDB.Context.Context.Operations;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Interfaces.Repositories;
@@ -62,6 +63,15 @@ namespace MBD.Transactions.Infrastructure.Repositories
         public async Task UpdateAsync(Category entity)
         {
             await _context.Categories.UpdateAsync(Builders<Category>.Filter.Where(x => x.Id == entity.Id), entity);
+        }
+
+        public async Task UpdateRangeAsync(List<Category> categories)
+        {
+            var updates = new List<BulkOperationModel<Category>>();
+            foreach (var category in categories)
+                updates.Add(new(Builders<Category>.Filter.Where(x => x.Id == category.Id), category));
+
+            await _context.Categories.UpdateRangeAsync(updates);
         }
     }
 }
