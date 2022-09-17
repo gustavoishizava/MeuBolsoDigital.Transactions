@@ -4,9 +4,9 @@ using MBD.Transactions.Domain.Entities;
 
 namespace MBD.Transactions.Application.AutoMapper
 {
-    public class DomainToReponseProfile : Profile
+    public class DomainToResponseProfile : Profile
     {
-        public DomainToReponseProfile()
+        public DomainToResponseProfile()
         {
             CreateMap<Category, CategoryResponse>(MemberList.Destination);
             CreateMap<Category, CategoryWithSubCategoriesResponse>(MemberList.Destination);

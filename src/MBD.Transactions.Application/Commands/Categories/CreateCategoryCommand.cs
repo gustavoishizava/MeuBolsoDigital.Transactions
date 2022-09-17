@@ -27,6 +27,9 @@ namespace MBD.Transactions.Application.Commands.Categories
                     .NotEmpty()
                     .MaximumLength(100);
 
+                RuleFor(x => x.ParentCategoryId)
+                    .NotEqual(Guid.Empty);
+
                 RuleFor(x => x.Type)
                     .IsInEnum();
             }
