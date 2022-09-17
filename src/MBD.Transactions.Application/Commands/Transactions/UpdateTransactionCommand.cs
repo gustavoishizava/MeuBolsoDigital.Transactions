@@ -53,6 +53,9 @@ namespace MBD.Transactions.Application.Commands.Transactions
                 RuleFor(x => x.DueDate)
                     .NotEmpty();
 
+                RuleFor(x => x.PaymentDate)
+                    .NotEqual(DateTime.MinValue);
+
                 RuleFor(x => x.Value)
                     .GreaterThanOrEqualTo(0);
 

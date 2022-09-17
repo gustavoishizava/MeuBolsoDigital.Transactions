@@ -29,6 +29,10 @@ namespace MBD.Transactions.Application.Commands.Transactions
 
         public async Task<IResult> Handle(UpdateTransactionCommand request, CancellationToken cancellationToken)
         {
+            var validation = request.Validate();
+            if (!validation.IsValid)
+                return Result.Fail(validation.Errors.ToString());
+
             var transaction = await _transactionRepository.GetByIdAsync(request.Id);
             if (transaction == null)
                 return Result.Fail("Transação inválida.");
@@ -43,6 +47,7 @@ namespace MBD.Transactions.Application.Commands.Transactions
 
             transaction.Update(bankAccount, category, request.ReferenceDate, request.DueDate, request.Value, request.Description, request.PaymentDate);
 
+            await _transactionRepository.UpdateAsync(transaction);
             await _unitOfWork.CommitAsync();
 
             return Result.Success();
