@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Bogus;
 using MBD.Transactions.Application.AutoMapper;
-using MBD.Transactions.Application.Commands.Categories;
+using MBD.Transactions.Application.Commands.Categories.Create;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Interfaces.Repositories;
@@ -14,7 +14,7 @@ using Moq;
 using Moq.AutoMock;
 using Xunit;
 
-namespace MBD.Transactions.UnitTests.Application.Commands.Categories
+namespace MBD.Transactions.UnitTests.Application.Commands.Categories.Create
 {
     public class CreateCategoryCommandHandlerTests
     {

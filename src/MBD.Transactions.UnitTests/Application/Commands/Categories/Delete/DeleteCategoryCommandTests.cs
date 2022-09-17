@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using MBD.Transactions.Application.Commands.Categories;
+using MBD.Transactions.Application.Commands.Categories.Delete;
 using Xunit;
 
-namespace MBD.Transactions.UnitTests.Application.Commands.Categories
+namespace MBD.Transactions.UnitTests.Application.Commands.Categories.Delete
 {
     public class DeleteCategoryCommandTests
     {

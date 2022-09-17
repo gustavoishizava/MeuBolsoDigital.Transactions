@@ -5,7 +5,7 @@ using MBD.Transactions.Application.Commands.Common;
 using MBD.Transactions.Domain.Enumerations;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
-namespace MBD.Transactions.Application.Commands.Categories
+namespace MBD.Transactions.Application.Commands.Categories.Update
 {
     public class UpdateCategoryCommand : Command<IResult>
     {

@@ -4,7 +4,7 @@ using FluentValidation.Results;
 using MBD.Transactions.Application.Commands.Common;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
-namespace MBD.Transactions.Application.Commands.Categories
+namespace MBD.Transactions.Application.Commands.Categories.Delete
 {
     public class DeleteCategoryCommand : Command<IResult>
     {

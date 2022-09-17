@@ -10,7 +10,7 @@ using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using MeuBolsoDigital.Core.Interfaces.Identity;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 
-namespace MBD.Transactions.Application.Commands.Categories
+namespace MBD.Transactions.Application.Commands.Categories.Create
 {
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, IResult<CategoryResponse>>
     {

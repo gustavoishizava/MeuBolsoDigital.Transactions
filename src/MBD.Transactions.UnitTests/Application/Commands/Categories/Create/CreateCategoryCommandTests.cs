@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using Bogus;
-using MBD.Transactions.Application.Commands.Categories;
+using MBD.Transactions.Application.Commands.Categories.Create;
 using MBD.Transactions.Domain.Enumerations;
 using Xunit;
 
-namespace MBD.Transactions.UnitTests.Application.Commands.Categories
+namespace MBD.Transactions.UnitTests.Application.Commands.Categories.Create
 {
     public class CreateCategoryCommandTests
     {

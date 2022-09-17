@@ -7,7 +7,7 @@ using MeuBolsoDigital.Application.Utils.Responses;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 
-namespace MBD.Transactions.Application.Commands.Categories
+namespace MBD.Transactions.Application.Commands.Categories.Update
 {
     public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, IResult>
     {

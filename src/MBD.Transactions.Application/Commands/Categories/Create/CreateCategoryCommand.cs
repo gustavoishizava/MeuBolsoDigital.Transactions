@@ -6,7 +6,7 @@ using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Enumerations;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
-namespace MBD.Transactions.Application.Commands.Categories
+namespace MBD.Transactions.Application.Commands.Categories.Create
 {
     public class CreateCategoryCommand : Command<IResult<CategoryResponse>>
     {

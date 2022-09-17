@@ -9,7 +9,7 @@ using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 using MeuBolsoDigital.CrossCutting.Extensions;
 
-namespace MBD.Transactions.Application.Commands.Categories
+namespace MBD.Transactions.Application.Commands.Categories.Delete
 {
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, IResult>
     {
