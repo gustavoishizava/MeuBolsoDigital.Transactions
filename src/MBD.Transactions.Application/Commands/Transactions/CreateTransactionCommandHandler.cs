@@ -32,7 +32,7 @@ namespace MBD.Transactions.Application.Commands.Transactions
         {
             var validation = request.Validate();
             if (!validation.IsValid)
-                return Result<TransactionResponse>.Fail();
+                return Result<TransactionResponse>.Fail(validation.Errors.ToString());
 
             var bankAccount = await _bankAccountRepository.GetByIdAsync(request.BankAccountId);
             if (bankAccount == null)
