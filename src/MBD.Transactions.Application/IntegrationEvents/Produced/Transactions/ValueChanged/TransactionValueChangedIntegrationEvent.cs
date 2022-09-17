@@ -1,6 +1,6 @@
 using System;
 
-namespace MBD.Transactions.Application.IntegrationEvents.Events
+namespace MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.ValueChanged
 {
     public class TransactionValueChangedIntegrationEvent
     {

@@ -1,7 +1,7 @@
 using System;
 using MBD.Transactions.Domain.Enumerations;
 
-namespace MBD.Transactions.Application.IntegrationEvents.Events
+namespace MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.Paid
 {
     public class TransactionPaidIntegrationEvent
     {

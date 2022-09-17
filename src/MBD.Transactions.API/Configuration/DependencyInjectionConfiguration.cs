@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using System.Reflection;
-using MBD.Transactions.Application.DomainEventHandlers;
-using MBD.Transactions.Application.IntegrationEvents.EventHandling;
-using MBD.Transactions.Application.IntegrationEvents.Events;
 using MBD.Transactions.Application.Queries.Transactions.Handlers;
 using MBD.Transactions.Application.Queries.Transactions.Queries;
 using MBD.Transactions.Application.Response;
@@ -25,6 +22,10 @@ using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 using MeuBolsoDigital.RabbitMQ.Extensions;
 using MBD.Transactions.API.Workers;
+using MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.Created;
+using MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.DescriptionChanged;
+using MBD.Transactions.Application.DomainEventHandlers.Transactions;
+using MBD.Transactions.Application.DomainEventHandlers.Categories;
 
 namespace MBD.Transactions.API.Configuration
 {

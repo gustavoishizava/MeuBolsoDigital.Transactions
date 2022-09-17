@@ -1,9 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Transactions.Application.IntegrationEvents.Events;
 using MediatR;
 
-namespace MBD.Transactions.Application.IntegrationEvents.EventHandling
+namespace MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.DescriptionChanged
 {
     public class BankAccountDescriptionChangedIntegrationEventHandler : INotificationHandler<BankAccountDescriptionChangedIntegrationEvent>
     {

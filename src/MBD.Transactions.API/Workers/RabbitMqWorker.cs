@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Transactions.Application.IntegrationEvents.Events;
+using MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.Created;
 using MediatR;
 using MeuBolsoDigital.CrossCutting.Extensions;
 using MeuBolsoDigital.RabbitMQ;

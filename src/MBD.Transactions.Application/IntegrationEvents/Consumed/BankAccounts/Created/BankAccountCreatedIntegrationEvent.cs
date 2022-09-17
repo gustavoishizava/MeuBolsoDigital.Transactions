@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace MBD.Transactions.Application.IntegrationEvents.Events
+namespace MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.Created
 {
     public class BankAccountCreatedIntegrationEvent : INotification
     {

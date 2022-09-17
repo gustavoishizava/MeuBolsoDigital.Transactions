@@ -1,12 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MBD.Transactions.Application.IntegrationEvents.Events;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 
-namespace MBD.Transactions.Application.IntegrationEvents.EventHandling
+namespace MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.Created
 {
     public class BankAccountCreatedIntegrationEventHandler : INotificationHandler<BankAccountCreatedIntegrationEvent>
     {
