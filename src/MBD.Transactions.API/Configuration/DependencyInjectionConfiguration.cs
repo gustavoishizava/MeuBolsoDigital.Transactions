@@ -23,6 +23,8 @@ using MBD.Transactions.API.Identity;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using System.Diagnostics.CodeAnalysis;
+using MeuBolsoDigital.RabbitMQ.Extensions;
+using MBD.Transactions.API.Workers;
 
 namespace MBD.Transactions.API.Configuration
 {
@@ -38,6 +40,7 @@ namespace MBD.Transactions.API.Configuration
                 .AddDomainEvents()
                 .AddIntegrationEvents()
                 .AddConsumers()
+                .AddRabbitMqConnection(configuration)
                 .AddOutBoxTransaction();
 
             services.AddHttpContextAccessor();
@@ -108,6 +111,8 @@ namespace MBD.Transactions.API.Configuration
 
         private static IServiceCollection AddConsumers(this IServiceCollection services)
         {
+            services.AddHostedService<RabbitMqWorker>();
+
             return services;
         }
 
