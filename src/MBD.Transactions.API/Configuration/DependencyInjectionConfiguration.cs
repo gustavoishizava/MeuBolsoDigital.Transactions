@@ -11,8 +11,6 @@ using MBD.Transactions.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MBD.Transactions.Application.Queries.Categories.Queries;
-using MBD.Transactions.Application.Queries.Categories.Handlers;
 using MeuBolsoDigital.Core.Interfaces.Identity;
 using MBD.Transactions.API.Identity;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
@@ -30,6 +28,9 @@ using MBD.Transactions.Application.Commands.Categories.Delete;
 using MBD.Transactions.Application.Commands.Transactions.Create;
 using MBD.Transactions.Application.Commands.Transactions.Update;
 using MBD.Transactions.Application.Commands.Transactions.Delete;
+using MBD.Transactions.Application.Queries.Categories.GetById;
+using MBD.Transactions.Application.Queries.Categories.GetAllByType;
+using MBD.Transactions.Application.Queries.Categories.GetAll;
 
 namespace MBD.Transactions.API.Configuration
 {

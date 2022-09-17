@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MBD.Transactions.Domain.Enumerations;
 using MediatR;
-using MBD.Transactions.Application.Queries.Categories.Queries;
 using MeuBolsoDigital.CrossCutting.Extensions;
 using MBD.Transactions.Application.Commands.Categories.Create;
 using MBD.Transactions.Application.Commands.Categories.Update;
 using MBD.Transactions.Application.Commands.Categories.Delete;
+using MBD.Transactions.Application.Queries.Categories.GetById;
+using MBD.Transactions.Application.Queries.Categories.GetAllByType;
+using MBD.Transactions.Application.Queries.Categories.GetAll;
 
 namespace MBD.Transactions.API.Controllers
 {

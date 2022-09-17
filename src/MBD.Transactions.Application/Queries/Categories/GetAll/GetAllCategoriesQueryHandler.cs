@@ -3,13 +3,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MBD.Transactions.Application.Queries.Categories.Queries;
 using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MediatR;
 
-namespace MBD.Transactions.Application.Queries.Categories.Handlers
+namespace MBD.Transactions.Application.Queries.Categories.GetAll
 {
     public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, CategoryByTypeResponse>
     {

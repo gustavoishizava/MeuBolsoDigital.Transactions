@@ -3,7 +3,7 @@ using MBD.Transactions.Application.Response;
 using MediatR;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
-namespace MBD.Transactions.Application.Queries.Categories.Queries
+namespace MBD.Transactions.Application.Queries.Categories.GetById
 {
     public class GetCategoryByIdQuery : IRequest<IResult<CategoryResponse>>
     {

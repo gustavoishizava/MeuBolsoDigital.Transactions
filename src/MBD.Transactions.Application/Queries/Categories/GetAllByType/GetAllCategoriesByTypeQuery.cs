@@ -3,7 +3,7 @@ using MBD.Transactions.Application.Response;
 using MBD.Transactions.Domain.Enumerations;
 using MediatR;
 
-namespace MBD.Transactions.Application.Queries.Categories.Queries
+namespace MBD.Transactions.Application.Queries.Categories.GetAllByType
 {
     public class GetAllCategoriesByTypeQuery : IRequest<IEnumerable<CategoryWithSubCategoriesResponse>>
     {
