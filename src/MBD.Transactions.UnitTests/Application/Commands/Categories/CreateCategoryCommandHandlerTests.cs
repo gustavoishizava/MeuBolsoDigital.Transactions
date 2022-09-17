@@ -137,14 +137,14 @@ namespace MBD.Transactions.UnitTests.Application.Commands.Categories
         public async Task Handle_HasParentCategoryId_ReturnSuccess()
         {
             // Arrange
+            var category = new Category(Guid.NewGuid(), "Category", TransactionType.Expense);
+
             var command = new CreateCategoryCommand
             {
-                ParentCategoryId = Guid.NewGuid(),
+                ParentCategoryId = category.Id,
                 Name = _faker.Random.AlphaNumeric(100),
                 Type = TransactionType.Expense
             };
-
-            var category = new Category(Guid.NewGuid(), "Category", TransactionType.Expense);
 
             _autoMocker.GetMock<ICategoryRepository>()
                 .Setup(x => x.GetByIdAsync(command.ParentCategoryId.Value))
@@ -161,7 +161,7 @@ namespace MBD.Transactions.UnitTests.Application.Commands.Categories
             Assert.NotEqual(Guid.Empty, result.Data.Id);
             Assert.Equal(command.Name, result.Data.Name);
             Assert.Equal(command.Type, result.Data.Type);
-            Assert.Equal(category.Id, result.Data.ParentCategoryId);
+            Assert.Equal(command.ParentCategoryId, result.Data.ParentCategoryId);
             Assert.Equal(Status.Active, result.Data.Status);
 
             _autoMocker.GetMock<ICategoryRepository>()
