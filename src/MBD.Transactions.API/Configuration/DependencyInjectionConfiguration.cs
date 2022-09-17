@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MBD.Transactions.Application.Queries.Categories.Queries;
 using MBD.Transactions.Application.Queries.Categories.Handlers;
-using MBD.Transactions.Application.Commands.Transactions;
 using MeuBolsoDigital.Core.Interfaces.Identity;
 using MBD.Transactions.API.Identity;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
@@ -28,6 +27,9 @@ using MBD.Transactions.Application.DomainEventHandlers.Categories;
 using MBD.Transactions.Application.Commands.Categories.Create;
 using MBD.Transactions.Application.Commands.Categories.Update;
 using MBD.Transactions.Application.Commands.Categories.Delete;
+using MBD.Transactions.Application.Commands.Transactions.Create;
+using MBD.Transactions.Application.Commands.Transactions.Update;
+using MBD.Transactions.Application.Commands.Transactions.Delete;
 
 namespace MBD.Transactions.API.Configuration
 {

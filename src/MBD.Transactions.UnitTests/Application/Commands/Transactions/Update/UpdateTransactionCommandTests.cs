@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Bogus;
-using MBD.Transactions.Application.Commands.Transactions;
+using MBD.Transactions.Application.Commands.Transactions.Update;
 using Xunit;
 
 namespace MBD.Transactions.UnitTests.Application.Commands.Transactions.Update

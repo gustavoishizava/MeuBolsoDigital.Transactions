@@ -5,7 +5,7 @@ using MBD.Transactions.Application.Commands.Common;
 using MBD.Transactions.Application.Response;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
-namespace MBD.Transactions.Application.Commands.Transactions
+namespace MBD.Transactions.Application.Commands.Transactions.Create
 {
     public class CreateTransactionCommand : Command<IResult<TransactionResponse>>
     {

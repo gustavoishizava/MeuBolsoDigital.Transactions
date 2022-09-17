@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using MBD.Transactions.Application.Commands.Transactions;
+using MBD.Transactions.Application.Commands.Transactions.Delete;
 using Xunit;
 
 namespace MBD.Transactions.UnitTests.Application.Commands.Transactions.Delete

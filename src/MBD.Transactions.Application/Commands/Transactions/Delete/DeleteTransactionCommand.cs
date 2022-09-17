@@ -4,7 +4,7 @@ using FluentValidation.Results;
 using MBD.Transactions.Application.Commands.Common;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 
-namespace MBD.Transactions.Application.Commands.Transactions
+namespace MBD.Transactions.Application.Commands.Transactions.Delete
 {
     public class DeleteTransactionCommand : Command<IResult>
     {

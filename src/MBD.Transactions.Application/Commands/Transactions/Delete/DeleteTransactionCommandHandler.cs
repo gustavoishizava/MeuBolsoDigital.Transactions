@@ -7,7 +7,7 @@ using MeuBolsoDigital.Application.Utils.Responses;
 using MeuBolsoDigital.Application.Utils.Responses.Interfaces;
 using MeuBolsoDigital.Core.Interfaces.Repositories;
 
-namespace MBD.Transactions.Application.Commands.Transactions
+namespace MBD.Transactions.Application.Commands.Transactions.Delete
 {
     public class DeleteTransactionCommandHandler : IRequestHandler<DeleteTransactionCommand, IResult>
     {

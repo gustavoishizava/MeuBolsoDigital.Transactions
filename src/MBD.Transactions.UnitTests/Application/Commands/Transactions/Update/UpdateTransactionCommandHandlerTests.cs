@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Bogus;
-using MBD.Transactions.Application.Commands.Transactions;
+using MBD.Transactions.Application.Commands.Transactions.Update;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Interfaces.Repositories;
