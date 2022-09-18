@@ -6,9 +6,9 @@ using MBD.Transactions.API.Models;
 using MBD.Transactions.Application.Commands.Transactions.Create;
 using MBD.Transactions.Application.Commands.Transactions.Delete;
 using MBD.Transactions.Application.Commands.Transactions.Update;
-using MBD.Transactions.Application.Queries.Transactions.Queries;
+using MBD.Transactions.Application.Queries.Transactions.GetAll;
+using MBD.Transactions.Application.Queries.Transactions.GetById;
 using MBD.Transactions.Application.Response;
-using MBD.Transactions.Application.Response.Models;
 using MediatR;
 using MeuBolsoDigital.CrossCutting.Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -57,7 +57,7 @@ namespace MBD.Transactions.API.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<TransactionModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<TransactionResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll()
         {
@@ -69,7 +69,7 @@ namespace MBD.Transactions.API.Controllers
         }
 
         [HttpGet("{id:GUID}")]
-        [ProducesResponseType(typeof(TransactionModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TransactionResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {

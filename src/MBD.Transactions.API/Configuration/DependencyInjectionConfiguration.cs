@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
-using MBD.Transactions.Application.Queries.Transactions.Handlers;
-using MBD.Transactions.Application.Queries.Transactions.Queries;
 using MBD.Transactions.Application.Response;
-using MBD.Transactions.Application.Response.Models;
 using MBD.Transactions.Domain.Events;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MBD.Transactions.Infrastructure;
@@ -31,6 +28,8 @@ using MBD.Transactions.Application.Commands.Transactions.Delete;
 using MBD.Transactions.Application.Queries.Categories.GetById;
 using MBD.Transactions.Application.Queries.Categories.GetAllByType;
 using MBD.Transactions.Application.Queries.Categories.GetAll;
+using MBD.Transactions.Application.Queries.Transactions.GetById;
+using MBD.Transactions.Application.Queries.Transactions.GetAll;
 
 namespace MBD.Transactions.API.Configuration
 {
@@ -83,8 +82,8 @@ namespace MBD.Transactions.API.Configuration
 
         private static IServiceCollection AddQueries(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler<GetTransactionByIdQuery, IResult<TransactionModel>>, GetTransactionByIdQueryHandler>();
-            services.AddScoped<IRequestHandler<GetAllTransactionsQuery, IEnumerable<TransactionModel>>, GetAllTransactionsQueryHandler>();
+            services.AddScoped<IRequestHandler<GetTransactionByIdQuery, IResult<TransactionResponse>>, GetTransactionByIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetAllTransactionsQuery, IEnumerable<TransactionResponse>>, GetAllTransactionsQueryHandler>();
 
             services.AddScoped<IRequestHandler<GetCategoryByIdQuery, IResult<CategoryResponse>>, GetCategoryByIdQueryHandler>();
             services.AddScoped<IRequestHandler<GetAllCategoriesQuery, CategoryByTypeResponse>, GetAllCategoriesQueryHandler>();

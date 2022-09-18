@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
@@ -22,6 +23,11 @@ namespace MBD.Transactions.Infrastructure.Repositories
         public async Task AddAsync(Transaction entity)
         {
             await _context.Transactions.AddAsync(entity);
+        }
+
+        public async Task<List<Transaction>> GetAllAsync()
+        {
+            return await _context.Transactions.Collection.Find(Builders<Transaction>.Filter.Where(x => x.TenantId == _loggedUser.UserId)).ToListAsync();
         }
 
         public async Task<Transaction> GetByIdAsync(Guid id)
