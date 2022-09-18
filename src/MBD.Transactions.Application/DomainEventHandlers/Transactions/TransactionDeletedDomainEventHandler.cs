@@ -9,7 +9,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
     {
         public Task Handle(TransactionDeletedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

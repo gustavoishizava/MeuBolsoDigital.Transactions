@@ -9,7 +9,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Categories
     {
         public Task Handle(CategoryNameChangedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
