@@ -267,7 +267,7 @@ namespace MBD.Transactions.UnitTests.API.Controllers
             var errorMessage = Guid.NewGuid().ToString();
 
             _autoMocker.GetMock<IMediator>().Setup(x => x.Send(It.Is<DeleteTransactionCommand>(x => x.Id == request.Id), default))
-                       .ReturnsAsync(Result<TransactionResponse>.Fail(errorMessage));
+                       .ReturnsAsync(Result.Fail(errorMessage));
 
             // Act
             var response = await _controller.Delete(request.Id) as ObjectResult;
@@ -288,7 +288,7 @@ namespace MBD.Transactions.UnitTests.API.Controllers
             var errorMessage = Guid.NewGuid().ToString();
 
             _autoMocker.GetMock<IMediator>().Setup(x => x.Send(It.Is<DeleteTransactionCommand>(x => x.Id == request.Id), default))
-                       .ReturnsAsync(Result<TransactionResponse>.Success());
+                       .ReturnsAsync(Result.Success());
 
             // Act
             var response = await _controller.Delete(request.Id) as NoContentResult;
