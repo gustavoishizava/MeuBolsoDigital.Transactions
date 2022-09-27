@@ -6,27 +6,29 @@ namespace MBD.Transactions.Application.Response
 {
     public class TransactionResponse
     {
-        public Guid Id { get; set; }
-        public Guid BankAccountId { get; set; }
-        public Guid CategoryId { get; set; }
-        public DateTime ReferenceDate { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime? PaymentDate { get; set; }
-        public TransactionStatus Status { get; set; }
-        public decimal Value { get; set; }
-        public string Description { get; set; }
+        public Guid Id { get; init; }
+        public BankAccountResponse BankAccount { get; init; }
+        public SimpleCategoryResponse Category { get; init; }
+        public DateTime ReferenceDate { get; init; }
+        public DateTime DueDate { get; init; }
+        public DateTime? PaymentDate { get; init; }
+        public TransactionStatus Status { get; init; }
+        public decimal Value { get; init; }
+        public string Description { get; init; }
+        public TransactionType Type { get; init; }
 
         public TransactionResponse(Transaction transaction)
         {
             Id = transaction.Id;
-            BankAccountId = transaction.BankAccount.Id;
-            CategoryId = transaction.Category.Id;
+            BankAccount = new BankAccountResponse(transaction.BankAccount.Id, transaction.BankAccount.Description);
+            Category = new SimpleCategoryResponse(transaction.Category.Id, transaction.Category.Name);
             ReferenceDate = transaction.ReferenceDate;
             DueDate = transaction.DueDate;
             PaymentDate = transaction.PaymentDate;
             Value = transaction.Value;
             Description = transaction.Description;
             Status = transaction.Status;
+            Type = transaction.Category.Type;
         }
 
         public TransactionResponse()

@@ -179,8 +179,11 @@ namespace MBD.Transactions.UnitTests.Application.Commands.Transactions.Create
             Assert.NotNull(result.Data);
 
             Assert.NotEqual(Guid.Empty, result.Data.Id);
-            Assert.Equal(bankAccount.Id, result.Data.BankAccountId);
-            Assert.Equal(category.Id, result.Data.CategoryId);
+            Assert.Equal(bankAccount.Id, result.Data.BankAccount.Id);
+            Assert.Equal(bankAccount.Description, result.Data.BankAccount.Description);
+            Assert.Equal(category.Id, result.Data.Category.Id);
+            Assert.Equal(category.Name, result.Data.Category.Name);
+            Assert.Equal(category.Type, result.Data.Type);
             Assert.Equal(command.ReferenceDate, result.Data.ReferenceDate);
             Assert.Equal(command.DueDate, result.Data.DueDate);
             Assert.Equal(command.PaymentDate, result.Data.PaymentDate);

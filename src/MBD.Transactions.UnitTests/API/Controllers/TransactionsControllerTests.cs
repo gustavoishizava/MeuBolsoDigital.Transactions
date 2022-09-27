@@ -55,8 +55,8 @@ namespace MBD.Transactions.UnitTests.API.Controllers
             var transaction = new TransactionResponse
             {
                 Id = Guid.NewGuid(),
-                BankAccountId = Guid.NewGuid(),
-                CategoryId = Guid.NewGuid(),
+                BankAccount = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
+                Category = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
                 ReferenceDate = DateTime.Now,
                 DueDate = DateTime.Now,
                 PaymentDate = DateTime.Now,
@@ -104,8 +104,8 @@ namespace MBD.Transactions.UnitTests.API.Controllers
             var transaction = new TransactionResponse
             {
                 Id = query.Id,
-                BankAccountId = Guid.NewGuid(),
-                CategoryId = Guid.NewGuid(),
+                BankAccount = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
+                Category = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
                 ReferenceDate = DateTime.Now,
                 DueDate = DateTime.Now,
                 PaymentDate = DateTime.Now,
@@ -169,8 +169,8 @@ namespace MBD.Transactions.UnitTests.API.Controllers
             var transaction = new TransactionResponse
             {
                 Id = Guid.NewGuid(),
-                BankAccountId = Guid.NewGuid(),
-                CategoryId = Guid.NewGuid(),
+                BankAccount = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
+                Category = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
                 ReferenceDate = DateTime.Now,
                 DueDate = DateTime.Now,
                 PaymentDate = DateTime.Now,
@@ -237,8 +237,8 @@ namespace MBD.Transactions.UnitTests.API.Controllers
             var transaction = new TransactionResponse
             {
                 Id = Guid.NewGuid(),
-                BankAccountId = Guid.NewGuid(),
-                CategoryId = Guid.NewGuid(),
+                BankAccount = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
+                Category = new(Guid.NewGuid(), _faker.Random.AlphaNumeric(100)),
                 ReferenceDate = DateTime.Now,
                 DueDate = DateTime.Now,
                 PaymentDate = DateTime.Now,

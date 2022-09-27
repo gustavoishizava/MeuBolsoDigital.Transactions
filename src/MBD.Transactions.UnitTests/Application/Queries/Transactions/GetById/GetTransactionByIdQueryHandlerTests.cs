@@ -73,8 +73,11 @@ namespace MBD.Transactions.UnitTests.Application.Queries.Transactions.GetById
             Assert.NotNull(result.Data);
 
             Assert.Equal(transaction.Id, result.Data.Id);
-            Assert.Equal(transaction.BankAccount.Id, result.Data.BankAccountId);
-            Assert.Equal(transaction.Category.Id, result.Data.CategoryId);
+            Assert.Equal(transaction.BankAccount.Id, result.Data.BankAccount.Id);
+            Assert.Equal(transaction.BankAccount.Description, result.Data.BankAccount.Description);
+            Assert.Equal(transaction.Category.Id, result.Data.Category.Id);
+            Assert.Equal(transaction.Category.Name, result.Data.Category.Name);
+            Assert.Equal(transaction.Category.Type, result.Data.Type);
             Assert.Equal(transaction.ReferenceDate, result.Data.ReferenceDate);
             Assert.Equal(transaction.DueDate, result.Data.DueDate);
             Assert.Equal(transaction.PaymentDate, result.Data.PaymentDate);
