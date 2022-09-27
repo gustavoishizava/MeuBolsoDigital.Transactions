@@ -40,7 +40,7 @@ namespace MBD.Transactions.API.Controllers
             if (!result.Succeeded)
                 return BadRequest(new ErrorModel(result));
 
-            return Ok(result.Data);
+            return Created($"/api/transactions/{result.Data.Id}", result.Data);
         }
 
         [HttpPut]
