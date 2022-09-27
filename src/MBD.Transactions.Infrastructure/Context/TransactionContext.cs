@@ -64,7 +64,7 @@ namespace MBD.Transactions.Infrastructure.Context
                 map.MapProperty(x => x.Type)
                     .SetElementName("type");
 
-                map.MapProperty(x => x.Type)
+                map.MapProperty(x => x.Status)
                     .SetElementName("status");
 
                 map.MapField("_subCategories")

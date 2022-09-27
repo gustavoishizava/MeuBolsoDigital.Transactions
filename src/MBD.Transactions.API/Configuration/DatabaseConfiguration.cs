@@ -21,6 +21,7 @@ namespace MBD.Transactions.API.Configuration
                 options.AddSerializer(new StatusSerializer());
                 options.AddSerializer(new TransactionStatusSerializer());
                 options.AddSerializer(new TransactionTypeSerializer());
+                options.AddSerializer(new Decimal128Serializer(BsonType.Decimal128));
             });
 
             return services;
