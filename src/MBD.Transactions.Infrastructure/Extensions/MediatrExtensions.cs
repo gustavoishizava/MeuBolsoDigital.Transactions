@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using MBD.Transactions.Domain.Entities.Common;
@@ -7,6 +8,7 @@ using MeuBolsoDigital.CrossCutting.Extensions;
 
 namespace MBD.Transactions.Infrastructure.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public static class MediatrExtensions
     {
         public static async Task DispatchDomainEventsAsync(this IMediator mediator, TransactionContext context)

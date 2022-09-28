@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using DotNet.MongoDB.Context.Configuration;
 using DotNet.MongoDB.Context.Context;
@@ -10,6 +11,7 @@ using MediatR;
 
 namespace MBD.Transactions.Infrastructure.Context
 {
+    [ExcludeFromCodeCoverage]
     public class TransactionContext : DbContext
     {
         private readonly IMediator _mediator;
