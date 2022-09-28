@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using DotNet.MongoDB.Context.Extensions;
 using MBD.Transactions.Infrastructure.Context;
-using MBD.Transactions.Infrastructure.Context.CustomerSerializers;
+using MBD.Transactions.Infrastructure.Context.CustomSerializers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;

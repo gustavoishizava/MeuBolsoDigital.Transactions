@@ -4,7 +4,7 @@ using DotNet.MongoDB.Context.Context;
 using DotNet.MongoDB.Context.Context.ModelConfiguration;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Entities.Common;
-using MBD.Transactions.Infrastructure.Context.CustomerSerializers;
+using MBD.Transactions.Infrastructure.Context.CustomSerializers;
 using MBD.Transactions.Infrastructure.Extensions;
 using MediatR;
 

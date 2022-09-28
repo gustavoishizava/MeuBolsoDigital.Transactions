@@ -3,7 +3,7 @@ using MBD.Transactions.Domain.Entities;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 
-namespace MBD.Transactions.Infrastructure.Context.CustomerSerializers
+namespace MBD.Transactions.Infrastructure.Context.CustomSerializers
 {
     [ExcludeFromCodeCoverage]
     public class TransactionCategorySerializer : SerializerBase<Category>
