@@ -4,6 +4,7 @@ using DotNet.MongoDB.Context.Context;
 using DotNet.MongoDB.Context.Context.ModelConfiguration;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Entities.Common;
+using MBD.Transactions.Infrastructure.Context.CustomerSerializers;
 using MBD.Transactions.Infrastructure.Extensions;
 using MediatR;
 
@@ -80,7 +81,8 @@ namespace MBD.Transactions.Infrastructure.Context
                     .SetElementName("bank_account");
 
                 map.MapProperty(x => x.Category)
-                    .SetElementName("category");
+                    .SetElementName("category")
+                    .SetSerializer(new TransactionCategorySerializer());
 
                 map.MapProperty(x => x.CreditCardBillId)
                     .SetElementName("credit_card_bill_id");
