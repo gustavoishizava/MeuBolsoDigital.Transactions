@@ -5,7 +5,6 @@ using DotNet.MongoDB.Context.Context;
 using DotNet.MongoDB.Context.Context.ModelConfiguration;
 using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Entities.Common;
-using MBD.Transactions.Infrastructure.Context.CustomSerializers;
 using MBD.Transactions.Infrastructure.Extensions;
 using MediatR;
 
@@ -29,8 +28,6 @@ namespace MBD.Transactions.Infrastructure.Context
         {
             modelBuilder.AddModelMap<BaseEntity>(map =>
             {
-                map.SetIsRootClass(true);
-
                 map.MapIdProperty(x => x.Id);
 
                 map.MapProperty(x => x.CreatedAt)
@@ -83,8 +80,7 @@ namespace MBD.Transactions.Infrastructure.Context
                     .SetElementName("bank_account");
 
                 map.MapProperty(x => x.Category)
-                    .SetElementName("category")
-                    .SetSerializer(new TransactionCategorySerializer());
+                    .SetElementName("category");
 
                 map.MapProperty(x => x.CreditCardBillId)
                     .SetElementName("credit_card_bill_id");

@@ -5,7 +5,6 @@ using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Interfaces.Repositories;
 using MBD.Transactions.Infrastructure.Context;
 using MeuBolsoDigital.Core.Interfaces.Identity;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace MBD.Transactions.Infrastructure.Repositories
@@ -48,21 +47,10 @@ namespace MBD.Transactions.Infrastructure.Repositories
 
         public async Task UpdateCategoryNameAsync(Guid categoryId, string name)
         {
-            var filter = new BsonDocument
-            {
-                {
-                    "category._id", categoryId.ToString()
-                }
-            };
+            var filter = Builders<Transaction>.Filter.Where(x => x.Category.Id == categoryId);
+            var update = Builders<Transaction>.Update.Set(x => x.Category.Name, name);
 
-            var update = new BsonDocument
-            {
-                {
-                    "$set", new BsonDocument { { "category.name", name } }
-                }
-            };
-
-            await _context.Transactions.Collection.UpdateManyAsync(filter, update);
+            await _context.Transactions.Collection.UpdateManyAsync(_context.ClientSessionHandle, filter, update);
         }
     }
 }
