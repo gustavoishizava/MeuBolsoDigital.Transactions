@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="MeuBolsoDigital.Core" Version="1.0.2" />
-    <PackageReference Include="MeuBolsoDigital.CrossCutting" Version="1.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1"/>
+    <PackageReference Include="MeuBolsoDigital.Core" Version="1.0.2"/>
+    <PackageReference Include="MeuBolsoDigital.CrossCutting" Version="1.0.1"/>
+    <PackageReference Include="MeuBolsoDigital.IntegrationEventLog" Version="1.0.3"/>
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>

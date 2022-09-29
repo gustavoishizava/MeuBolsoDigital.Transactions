@@ -1,15 +1,30 @@
 using System.Threading;
 using System.Threading.Tasks;
+using MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.Paid;
 using MBD.Transactions.Domain.Events;
 using MediatR;
+using MeuBolsoDigital.IntegrationEventLog.Services;
 
 namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
 {
     public class RealizedPaymentDomainEventHandler : INotificationHandler<RealizedPaymentDomainEvent>
     {
-        public Task Handle(RealizedPaymentDomainEvent notification, CancellationToken cancellationToken)
+        private readonly IIntegrationEventLogService _service;
+
+        public RealizedPaymentDomainEventHandler(IIntegrationEventLogService service)
         {
-            return Task.CompletedTask;
+            _service = service;
+        }
+
+        public async Task Handle(RealizedPaymentDomainEvent notification, CancellationToken cancellationToken)
+        {
+            var @event = new TransactionPaidIntegrationEvent(notification.Id,
+                                                             notification.Value,
+                                                             notification.Date,
+                                                             notification.BankAccountId,
+                                                             notification.Type);
+
+            await _service.CreateEventAsync<TransactionPaidIntegrationEvent>(@event, "transaction.updated.paid");
         }
     }
 }

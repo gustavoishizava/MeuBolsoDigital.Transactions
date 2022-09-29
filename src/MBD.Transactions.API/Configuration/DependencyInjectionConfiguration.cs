@@ -30,6 +30,7 @@ using MBD.Transactions.Application.Queries.Categories.GetAllByType;
 using MBD.Transactions.Application.Queries.Categories.GetAll;
 using MBD.Transactions.Application.Queries.Transactions.GetById;
 using MBD.Transactions.Application.Queries.Transactions.GetAll;
+using MeuBolsoDigital.IntegrationEventLog.Extensions;
 
 namespace MBD.Transactions.API.Configuration
 {
@@ -46,6 +47,7 @@ namespace MBD.Transactions.API.Configuration
                 .AddIntegrationEvents()
                 .AddConsumers()
                 .AddRabbitMqConnection(configuration)
+                .AddIntegrationEventLog<IntegrationEventLogRepository>()
                 .AddOutBoxTransaction();
 
             services.AddHttpContextAccessor();

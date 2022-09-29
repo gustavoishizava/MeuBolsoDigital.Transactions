@@ -7,6 +7,7 @@ using MBD.Transactions.Domain.Entities;
 using MBD.Transactions.Domain.Entities.Common;
 using MBD.Transactions.Infrastructure.Extensions;
 using MediatR;
+using MeuBolsoDigital.IntegrationEventLog;
 
 namespace MBD.Transactions.Infrastructure.Context
 {
@@ -23,6 +24,7 @@ namespace MBD.Transactions.Infrastructure.Context
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<IntegrationEventLogEntry> IntegrationEventLogEntries { get; set; }
 
         protected override void OnModelConfiguring(ModelBuilder modelBuilder)
         {
@@ -102,6 +104,16 @@ namespace MBD.Transactions.Infrastructure.Context
 
                 map.MapProperty(x => x.Description)
                     .SetElementName("description");
+            });
+
+            modelBuilder.AddModelMap<IntegrationEventLogEntry>("integration_event_log_entries", mapConfig =>
+            {
+                mapConfig.MapIdProperty(x => x.Id);
+                mapConfig.MapProperty(x => x.CreatedAt).SetElementName("created_at");
+                mapConfig.MapProperty(x => x.UpdatedAt).SetElementName("updated_at");
+                mapConfig.MapProperty(x => x.EventTypeName).SetElementName("entity_type_name");
+                mapConfig.MapProperty(x => x.Content).SetElementName("content");
+                mapConfig.MapProperty(x => x.State).SetElementName("state");
             });
         }
 

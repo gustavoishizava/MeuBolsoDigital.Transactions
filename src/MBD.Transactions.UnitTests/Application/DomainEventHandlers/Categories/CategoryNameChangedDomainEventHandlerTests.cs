@@ -8,7 +8,7 @@ using Moq;
 using Moq.AutoMock;
 using Xunit;
 
-namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers
+namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Categories
 {
     public class CategoryNameChangedDomainEventHandlerTests
     {
