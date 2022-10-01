@@ -26,7 +26,10 @@ namespace MBD.Transactions.Infrastructure.Repositories
         public async Task<IEnumerable<IntegrationEventLogEntry>> RetrieveEventLogsPendingToPublishAsync()
         {
             var filter = Builders<IntegrationEventLogEntry>.Filter.Where(x => x.State == EventState.NotPublished);
-            return await _context.IntegrationEventLogEntries.Collection.Find(filter).ToListAsync();
+            var update = Builders<IntegrationEventLogEntry>.Update.Set(x => x.State, EventState.InProgress);
+            var @event = await _context.IntegrationEventLogEntries.Collection.FindOneAndUpdateAsync(filter, update);
+
+            return new List<IntegrationEventLogEntry>() { @event };
         }
 
         public async Task UpdateAsync(IntegrationEventLogEntry integrationEventLogEntry)

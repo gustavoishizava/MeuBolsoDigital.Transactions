@@ -37,7 +37,7 @@ namespace MBD.Transactions.API.Workers
             while (!stoppingToken.IsCancellationRequested)
             {
                 await ProcessIntegrationEventsAsync(stoppingToken);
-                await Task.Delay(5000);
+                await Task.Delay(TimeSpan.FromSeconds(2));
             }
         }
 
