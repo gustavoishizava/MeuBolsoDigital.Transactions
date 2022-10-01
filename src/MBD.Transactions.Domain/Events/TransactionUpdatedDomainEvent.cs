@@ -7,6 +7,7 @@ namespace MBD.Transactions.Domain.Events
 {
     public class TransactionUpdatedDomainEvent : DomainEvent
     {
+        public Guid TenantId { get; private init; }
         public Guid BankAccountId { get; private init; }
         public BankAccount BankAccount { get; private init; }
         public Category Category { get; private init; }
@@ -20,6 +21,7 @@ namespace MBD.Transactions.Domain.Events
         public TransactionUpdatedDomainEvent(Transaction transaction)
         {
             AggregateId = transaction.Id;
+            TenantId = transaction.TenantId;
             BankAccount = transaction.BankAccount;
             Category = transaction.Category;
             ReferenceDate = transaction.ReferenceDate;

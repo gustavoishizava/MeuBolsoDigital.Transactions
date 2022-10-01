@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MBD.Transactions.Application.DomainEventHandlers.Transactions;
-using MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.UndoPayment;
+using MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.Deleted;
 using MBD.Transactions.Domain.Events;
 using MeuBolsoDigital.IntegrationEventLog.Services;
 using Moq;
@@ -11,11 +11,11 @@ using Xunit;
 
 namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transactions
 {
-    public class ReversedPaymentDomainEventHandlerTests
+    public class TransactionDeletedDomainEventHandlerTests
     {
         private readonly AutoMocker _autoMocker;
 
-        public ReversedPaymentDomainEventHandlerTests()
+        public TransactionDeletedDomainEventHandlerTests()
         {
             _autoMocker = new AutoMocker();
         }
@@ -24,15 +24,15 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
         public async Task Handle_ReturnSuccess()
         {
             // Arrange
-            var @event = new ReversedPaymentDomainEvent(Guid.NewGuid());
-            var handler = _autoMocker.CreateInstance<ReversedPaymentDomainEventHandler>();
+            var @event = new TransactionDeletedDomainEvent(Guid.NewGuid());
+            var handler = _autoMocker.CreateInstance<TransactionDeletedDomainEventHandler>();
 
             // Act
             await handler.Handle(@event, new CancellationToken());
 
             // Assert
             _autoMocker.GetMock<IIntegrationEventLogService>()
-            .Verify(x => x.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(It.Is<TransactionUndoPaymentIntegrationEvent>(x => x.Id == @event.Id), "transaction.updated.undo_payment"), Times.Once);
+            .Verify(x => x.CreateEventAsync<TransactionDeletedIntegrationEvent>(It.Is<TransactionDeletedIntegrationEvent>(x => x.Id == @event.Id), "transaction.deleted"), Times.Once);
         }
     }
 }

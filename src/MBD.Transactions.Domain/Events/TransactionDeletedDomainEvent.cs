@@ -5,11 +5,11 @@ namespace MBD.Transactions.Domain.Events
 {
     public class TransactionDeletedDomainEvent : DomainEvent
     {
-        public Guid TransactionId { get; private init; }
-        public TransactionDeletedDomainEvent(Guid transactionId)
+        public Guid Id { get; private init; }
+        public TransactionDeletedDomainEvent(Guid id)
         {
-            AggregateId = transactionId;
-            TransactionId = transactionId;
+            AggregateId = id;
+            Id = id;
         }
     }
 }
