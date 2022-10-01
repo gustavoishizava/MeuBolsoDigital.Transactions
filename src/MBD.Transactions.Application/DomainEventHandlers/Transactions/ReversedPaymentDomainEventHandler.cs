@@ -1,15 +1,26 @@
 using System.Threading;
 using System.Threading.Tasks;
+using MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.UndoPayment;
 using MBD.Transactions.Domain.Events;
 using MediatR;
+using MeuBolsoDigital.IntegrationEventLog.Services;
 
 namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
 {
     public class ReversedPaymentDomainEventHandler : INotificationHandler<ReversedPaymentDomainEvent>
     {
-        public Task Handle(ReversedPaymentDomainEvent notification, CancellationToken cancellationToken)
+        private readonly IIntegrationEventLogService _service;
+
+        public ReversedPaymentDomainEventHandler(IIntegrationEventLogService service)
         {
-            return Task.CompletedTask;
+            _service = service;
+        }
+
+        public async Task Handle(ReversedPaymentDomainEvent notification, CancellationToken cancellationToken)
+        {
+            var @event = new TransactionUndoPaymentIntegrationEvent(notification.Id);
+
+            await _service.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(@event, "transaction.updated.undo_payment");
         }
     }
 }
