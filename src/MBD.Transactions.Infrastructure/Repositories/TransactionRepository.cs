@@ -45,6 +45,14 @@ namespace MBD.Transactions.Infrastructure.Repositories
             await _context.Transactions.UpdateAsync(Builders<Transaction>.Filter.Where(x => x.Id == entity.Id), entity);
         }
 
+        public async Task UpdateBankAccountDescriptionAsync(Guid bankAccountId, string description)
+        {
+            var filter = Builders<Transaction>.Filter.Where(x => x.BankAccount.Id == bankAccountId);
+            var update = Builders<Transaction>.Update.Set(x => x.BankAccount.Description, description);
+
+            await _context.Transactions.Collection.UpdateManyAsync(_context.ClientSessionHandle, filter, update);
+        }
+
         public async Task UpdateCategoryNameAsync(Guid categoryId, string name)
         {
             var filter = Builders<Transaction>.Filter.Where(x => x.Category.Id == categoryId);

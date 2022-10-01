@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.Created;
+using MBD.Transactions.Application.IntegrationEvents.Consumed.BankAccounts.DescriptionChanged;
 using MediatR;
 using MeuBolsoDigital.CrossCutting.Extensions;
 using MeuBolsoDigital.RabbitMQ;
@@ -87,8 +88,11 @@ namespace MBD.Transactions.API.Workers
                 switch (filter)
                 {
                     case RabbitMqConstants.BANK_ACCOUNT_CREATED:
-                        var message = args.Body.Deserialize<BankAccountCreatedIntegrationEvent>();
-                        await mediator.Publish(message);
+                        await mediator.Publish(args.Body.Deserialize<BankAccountCreatedIntegrationEvent>());
+                        return true;
+
+                    case RabbitMqConstants.BANK_ACCOUNT_DESCRIPTION_CHANGED:
+                        await mediator.Publish(args.Body.Deserialize<BankAccountDescriptionChangedIntegrationEvent>());
                         return true;
 
                     default:

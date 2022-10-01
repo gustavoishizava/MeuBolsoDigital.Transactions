@@ -10,5 +10,6 @@ namespace MBD.Transactions.Domain.Interfaces.Repositories
     {
         Task<List<Transaction>> GetAllAsync();
         Task UpdateCategoryNameAsync(Guid categoryId, string name);
+        Task UpdateBankAccountDescriptionAsync(Guid bankAccountId, string description);
     }
 }
