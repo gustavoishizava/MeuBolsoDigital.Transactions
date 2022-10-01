@@ -125,6 +125,8 @@ namespace MBD.Transactions.API.Configuration
 
         private static IServiceCollection AddOutBoxTransaction(this IServiceCollection services)
         {
+            services.AddHostedService<IntegrationEventWorker>();
+
             return services;
         }
     }
