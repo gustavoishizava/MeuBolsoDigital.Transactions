@@ -22,7 +22,8 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
                                                              notification.Value,
                                                              notification.Date,
                                                              notification.BankAccountId,
-                                                             notification.Type);
+                                                             notification.Type,
+                                                             notification.TimeStamp);
 
             await _service.CreateEventAsync<TransactionPaidIntegrationEvent>(@event, "transaction.updated.paid");
         }

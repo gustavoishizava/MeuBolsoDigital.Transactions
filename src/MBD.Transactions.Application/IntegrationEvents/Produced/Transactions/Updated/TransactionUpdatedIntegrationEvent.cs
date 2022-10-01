@@ -16,8 +16,9 @@ namespace MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.U
         public decimal Value { get; init; }
         public string Description { get; init; }
         public TransactionType Type { get; init; }
+        public DateTime TimeStamp { get; private init; }
 
-        public TransactionUpdatedIntegrationEvent(Guid id, Guid tenantId, Guid bankAccountId, Guid categoryId, DateTime referenceDate, DateTime dueDate, DateTime? paymentDate, TransactionStatus status, decimal value, string description, TransactionType type)
+        public TransactionUpdatedIntegrationEvent(Guid id, Guid tenantId, Guid bankAccountId, Guid categoryId, DateTime referenceDate, DateTime dueDate, DateTime? paymentDate, TransactionStatus status, decimal value, string description, TransactionType type, DateTime timeStamp)
         {
             Id = id;
             TenantId = tenantId;
@@ -30,6 +31,7 @@ namespace MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.U
             Value = value;
             Description = description;
             Type = type;
+            TimeStamp = timeStamp;
         }
     }
 }

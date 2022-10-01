@@ -32,7 +32,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
 
             // Assert
             _autoMocker.GetMock<IIntegrationEventLogService>()
-            .Verify(x => x.CreateEventAsync<TransactionDeletedIntegrationEvent>(It.Is<TransactionDeletedIntegrationEvent>(x => x.Id == @event.Id), "transaction.deleted"), Times.Once);
+            .Verify(x => x.CreateEventAsync<TransactionDeletedIntegrationEvent>(It.Is<TransactionDeletedIntegrationEvent>(x => x.Id == @event.Id && x.TimeStamp == @event.TimeStamp), "transaction.deleted"), Times.Once);
         }
     }
 }

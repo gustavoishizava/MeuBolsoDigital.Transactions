@@ -48,7 +48,8 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
                                                                                                                                && x.Status == @event.Status
                                                                                                                                && x.Value == @event.Value
                                                                                                                                && x.Description == @event.Description
-                                                                                                                               && x.Type == @event.Category.Type), "transaction.updated"), Times.Once);
+                                                                                                                               && x.Type == @event.Category.Type
+                                                                                                                               && x.TimeStamp == @event.TimeStamp), "transaction.updated"), Times.Once);
         }
     }
 }

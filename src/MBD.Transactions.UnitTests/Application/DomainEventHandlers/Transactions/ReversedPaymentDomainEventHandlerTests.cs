@@ -33,7 +33,11 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
 
             // Assert
             _autoMocker.GetMock<IIntegrationEventLogService>()
-            .Verify(x => x.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(It.Is<TransactionUndoPaymentIntegrationEvent>(x => x.Id == @event.Id && x.BankAccountId == @event.BankAccountId && x.Type == @event.Type && x.Value == @event.Value), "transaction.updated.undo_payment"), Times.Once);
+            .Verify(x => x.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(It.Is<TransactionUndoPaymentIntegrationEvent>(x => x.Id == @event.Id
+                                                                                                                                       && x.BankAccountId == @event.BankAccountId
+                                                                                                                                       && x.Type == @event.Type
+                                                                                                                                       && x.Value == @event.Value
+                                                                                                                                       && x.TimeStamp == @event.TimeStamp), "transaction.updated.undo_payment"), Times.Once);
         }
     }
 }

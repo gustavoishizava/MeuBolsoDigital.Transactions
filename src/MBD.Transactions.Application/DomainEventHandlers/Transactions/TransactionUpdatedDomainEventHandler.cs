@@ -28,7 +28,8 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
                                                                 notification.Status,
                                                                 notification.Value,
                                                                 notification.Description,
-                                                                notification.Category.Type);
+                                                                notification.Category.Type,
+                                                                notification.TimeStamp);
 
             await _service.CreateEventAsync<TransactionUpdatedIntegrationEvent>(@event, "transaction.updated");
         }

@@ -18,7 +18,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
 
         public async Task Handle(TransactionDeletedDomainEvent notification, CancellationToken cancellationToken)
         {
-            var @event = new TransactionDeletedIntegrationEvent(notification.Id);
+            var @event = new TransactionDeletedIntegrationEvent(notification.Id, notification.TimeStamp);
 
             await _service.CreateEventAsync<TransactionDeletedIntegrationEvent>(@event, "transaction.deleted");
         }

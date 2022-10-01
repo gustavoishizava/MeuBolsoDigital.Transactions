@@ -10,14 +10,16 @@ namespace MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.P
         public string Type { get; private init; }
         public decimal Value { get; private init; }
         public DateTime Date { get; private init; }
+        public DateTime TimeStamp { get; private init; }
 
-        public TransactionPaidIntegrationEvent(Guid id, decimal value, DateTime date, Guid bankAccountId, TransactionType type)
+        public TransactionPaidIntegrationEvent(Guid id, decimal value, DateTime date, Guid bankAccountId, TransactionType type, DateTime timeStamp)
         {
             Id = id;
             Value = value;
             Date = date;
             BankAccountId = bankAccountId;
             Type = type.ToString();
+            TimeStamp = timeStamp;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
 
         public async Task Handle(ReversedPaymentDomainEvent notification, CancellationToken cancellationToken)
         {
-            var @event = new TransactionUndoPaymentIntegrationEvent(notification.Id, notification.BankAccountId, notification.Type, notification.Value);
+            var @event = new TransactionUndoPaymentIntegrationEvent(notification.Id, notification.BankAccountId, notification.Type, notification.Value, notification.TimeStamp);
 
             await _service.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(@event, "transaction.updated.undo_payment");
         }
