@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MBD.Transactions.Application.DomainEventHandlers.Transactions;
 using MBD.Transactions.Application.IntegrationEvents.Produced.Transactions.UndoPayment;
+using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Domain.Events;
 using MeuBolsoDigital.IntegrationEventLog.Services;
 using Moq;
@@ -24,7 +25,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
         public async Task Handle_ReturnSuccess()
         {
             // Arrange
-            var @event = new ReversedPaymentDomainEvent(Guid.NewGuid());
+            var @event = new ReversedPaymentDomainEvent(Guid.NewGuid(), Guid.NewGuid(), TransactionType.Expense, 10);
             var handler = _autoMocker.CreateInstance<ReversedPaymentDomainEventHandler>();
 
             // Act
@@ -32,7 +33,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
 
             // Assert
             _autoMocker.GetMock<IIntegrationEventLogService>()
-            .Verify(x => x.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(It.Is<TransactionUndoPaymentIntegrationEvent>(x => x.Id == @event.Id), "transaction.updated.undo_payment"), Times.Once);
+            .Verify(x => x.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(It.Is<TransactionUndoPaymentIntegrationEvent>(x => x.Id == @event.Id && x.BankAccountId == @event.BankAccountId && x.Type == @event.Type && x.Value == @event.Value), "transaction.updated.undo_payment"), Times.Once);
         }
     }
 }

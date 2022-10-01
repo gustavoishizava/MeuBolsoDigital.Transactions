@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -28,6 +29,9 @@ namespace MBD.Transactions.Infrastructure.Repositories
             var filter = Builders<IntegrationEventLogEntry>.Filter.Where(x => x.State == EventState.NotPublished);
             var update = Builders<IntegrationEventLogEntry>.Update.Set(x => x.State, EventState.InProgress);
             var @event = await _context.IntegrationEventLogEntries.Collection.FindOneAndUpdateAsync(filter, update);
+
+            if (@event is null)
+                return Enumerable.Empty<IntegrationEventLogEntry>();
 
             return new List<IntegrationEventLogEntry>() { @event };
         }
