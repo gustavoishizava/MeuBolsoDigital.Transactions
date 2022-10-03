@@ -38,7 +38,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
             .Verify(x => x.CreateEventAsync<TransactionValueChangedIntegrationEvent>(It.Is<TransactionValueChangedIntegrationEvent>(x => x.Id == @event.Id
                                                                                                                                          && x.NewValue == @event.NewValue
                                                                                                                                          && x.OldValue == @event.OldValue
-                                                                                                                                         && x.TimeStamp == @event.TimeStamp), "transaction.updated.value_changed"), Times.Once);
+                                                                                                                                         && x.TimeStamp == @event.TimeStamp), "updated.value_changed"), Times.Once);
         }
     }
 }

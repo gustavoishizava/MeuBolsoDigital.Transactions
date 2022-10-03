@@ -20,7 +20,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
         {
             var @event = new TransactionDeletedIntegrationEvent(notification.Id, notification.TimeStamp);
 
-            await _service.CreateEventAsync<TransactionDeletedIntegrationEvent>(@event, "transaction.deleted");
+            await _service.CreateEventAsync<TransactionDeletedIntegrationEvent>(@event, "deleted");
         }
     }
 }

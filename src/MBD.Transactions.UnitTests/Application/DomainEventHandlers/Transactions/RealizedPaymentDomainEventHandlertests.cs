@@ -38,7 +38,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
                                                                                                                          && x.BankAccountId == @event.BankAccountId
                                                                                                                          && x.Value == @event.Value
                                                                                                                          && x.Type == @event.Type.ToString()
-                                                                                                                         && x.TimeStamp == @event.TimeStamp), "transaction.updated.paid"), Times.Once);
+                                                                                                                         && x.TimeStamp == @event.TimeStamp), "updated.paid"), Times.Once);
         }
     }
 }

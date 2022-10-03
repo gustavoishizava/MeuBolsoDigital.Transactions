@@ -25,7 +25,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
                                                              notification.Type,
                                                              notification.TimeStamp);
 
-            await _service.CreateEventAsync<TransactionPaidIntegrationEvent>(@event, "transaction.updated.paid");
+            await _service.CreateEventAsync<TransactionPaidIntegrationEvent>(@event, "updated.paid");
         }
     }
 }

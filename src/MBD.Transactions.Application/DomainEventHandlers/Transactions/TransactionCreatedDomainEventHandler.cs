@@ -31,7 +31,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
                                                                 notification.Category.Type,
                                                                 notification.TimeStamp);
 
-            await _service.CreateEventAsync<TransactionCreatedIntegrationEvent>(@event, "transaction.created");
+            await _service.CreateEventAsync<TransactionCreatedIntegrationEvent>(@event, "created");
         }
     }
 }

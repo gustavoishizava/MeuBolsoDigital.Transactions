@@ -37,7 +37,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
                                                                                                                                        && x.BankAccountId == @event.BankAccountId
                                                                                                                                        && x.Type == @event.Type
                                                                                                                                        && x.Value == @event.Value
-                                                                                                                                       && x.TimeStamp == @event.TimeStamp), "transaction.updated.undo_payment"), Times.Once);
+                                                                                                                                       && x.TimeStamp == @event.TimeStamp), "updated.undo_payment"), Times.Once);
         }
     }
 }

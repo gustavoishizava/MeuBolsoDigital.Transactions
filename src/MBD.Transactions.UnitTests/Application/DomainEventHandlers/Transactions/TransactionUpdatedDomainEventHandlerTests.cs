@@ -49,7 +49,7 @@ namespace MBD.Transactions.UnitTests.Application.DomainEventHandlers.Transaction
                                                                                                                                && x.Value == @event.Value
                                                                                                                                && x.Description == @event.Description
                                                                                                                                && x.Type == @event.Category.Type
-                                                                                                                               && x.TimeStamp == @event.TimeStamp), "transaction.updated"), Times.Once);
+                                                                                                                               && x.TimeStamp == @event.TimeStamp), "updated"), Times.Once);
         }
     }
 }

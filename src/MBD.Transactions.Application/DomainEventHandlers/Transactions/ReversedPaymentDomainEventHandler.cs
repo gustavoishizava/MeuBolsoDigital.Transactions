@@ -20,7 +20,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
         {
             var @event = new TransactionUndoPaymentIntegrationEvent(notification.Id, notification.BankAccountId, notification.Type, notification.Value, notification.TimeStamp);
 
-            await _service.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(@event, "transaction.updated.undo_payment");
+            await _service.CreateEventAsync<TransactionUndoPaymentIntegrationEvent>(@event, "updated.undo_payment");
         }
     }
 }

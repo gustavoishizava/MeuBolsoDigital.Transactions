@@ -20,7 +20,7 @@ namespace MBD.Transactions.Application.DomainEventHandlers.Transactions
         {
             var @event = new TransactionValueChangedIntegrationEvent(notification.Id, notification.NewValue, notification.OldValue, notification.TimeStamp);
 
-            await _service.CreateEventAsync<TransactionValueChangedIntegrationEvent>(@event, "transaction.updated.value_changed");
+            await _service.CreateEventAsync<TransactionValueChangedIntegrationEvent>(@event, "updated.value_changed");
         }
     }
 }
