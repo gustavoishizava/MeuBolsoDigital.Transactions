@@ -3,7 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Ishizava.MongoDB.Context" Version="1.0.5"/>
+    <PackageReference Include="Ishizava.MongoDB.Context" Version="1.0.7"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MBD.Transactions.Domain\MBD.Transactions.Domain.csproj"/>

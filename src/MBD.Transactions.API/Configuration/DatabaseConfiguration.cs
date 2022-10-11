@@ -1,7 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using DotNet.MongoDB.Context.Extensions;
+using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Infrastructure.Context;
-using MBD.Transactions.Infrastructure.Context.CustomSerializers;
+using MeuBolsoDigital.IntegrationEventLog;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -18,11 +19,11 @@ namespace MBD.Transactions.API.Configuration
             {
                 options.ConfigureConnection(configuration.GetConnectionString("Default"), configuration["DatabaseName"]);
                 options.AddSerializer(new GuidSerializer(BsonType.String));
-                options.AddSerializer(new StatusSerializer());
-                options.AddSerializer(new TransactionStatusSerializer());
-                options.AddSerializer(new TransactionTypeSerializer());
+                options.AddSerializer(new EnumSerializer<Status>());
+                options.AddSerializer(new EnumSerializer<TransactionStatus>());
+                options.AddSerializer(new EnumSerializer<TransactionType>());
+                options.AddSerializer(new EnumSerializer<EventState>());
                 options.AddSerializer(new DecimalSerializer(BsonType.Decimal128));
-                options.AddSerializer(new EventStateSerializer());
             });
 
             return services;
