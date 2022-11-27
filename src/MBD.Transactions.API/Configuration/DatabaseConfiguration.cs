@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using DotNet.MongoDB.Context.Extensions;
 using MBD.Transactions.Domain.Enumerations;
 using MBD.Transactions.Infrastructure.Context;
+using MBD.Transactions.Infrastructure.Context.Mappings;
 using MeuBolsoDigital.IntegrationEventLog;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,13 @@ namespace MBD.Transactions.API.Configuration
                 options.AddSerializer(new EnumSerializer<TransactionType>());
                 options.AddSerializer(new EnumSerializer<EventState>());
                 options.AddSerializer(new DecimalSerializer(BsonType.Decimal128));
+
+                options.AddBsonClassMap(new BaseEntityMapping());
+                options.AddBsonClassMap(new BaseEntityWithEventMapping());
+                options.AddBsonClassMap(new BankAccountMapping());
+                options.AddBsonClassMap(new CategoryMapping());
+                options.AddBsonClassMap(new TransactionMapping());
+                options.AddBsonClassMap(new IntegrationEventLogEntryMapping());
             });
 
             return services;
